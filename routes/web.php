@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('layouts.public.public-master');
+    return view('public.index');
+});
+
+Route::get('/admin', function () {
+    return view('admin.index');
 });
 
 Auth::routes();
