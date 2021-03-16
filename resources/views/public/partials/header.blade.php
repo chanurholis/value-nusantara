@@ -38,8 +38,8 @@
                         </a>
                         <nav id="primary-nav" class="dropdown cf">
                             <ul class="dropdown menu">
-                                <li><a href="{{ route('register') }}">Register</a></li>
-                                <li><a href="{{ route('login') }}">Login</a></li>
+                                <li><a href="{{ route('register') }}">Daftar</a></li>
+                                <li><a href="{{ route('login') }}">Masuk</a></li>
                             </ul>
                         </nav>
                     </div>

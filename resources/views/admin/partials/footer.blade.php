@@ -2,7 +2,7 @@
                     <div class="footer-left">
                         Copyright &copy; {{ date('Y') }} {{ config('app.name') }} <a href="https://chanurholis.github.io" target="_blank">Chacha Nurholis</a>
                     </div>
-                    <div class="footer-right">2.3.0</div>
+                    <div class="footer-right">1.0</div>
                 </footer>
             </div>
         </div>
@@ -20,6 +20,9 @@
         <!-- Template JS File -->
         <script src="http://localhost/TEMPLATE/stisla/assets/js/scripts.js"></script>
         <script src="http://localhost/TEMPLATE/stisla/assets/js/custom.js"></script>
+
+        <!-- Sweet Alert -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
 
         <!-- Page Specific JS File -->
     </body>
