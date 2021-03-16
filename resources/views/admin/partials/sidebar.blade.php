@@ -11,10 +11,6 @@
             <li class="menu-header">Beranda</li>
             <li><a class="nav-link" href=""><i class="fas fa-fire"></i> <span>Beranda</span></a></li>
 
-            <!-- Pengguna -->
-            <li class="menu-header">Pengguna</li>
-            <li><a class="nav-link" href=""><i class="fas fa-users"></i> <span>Pengguna</span></a></li>
-
             <li class="menu-header">Starter</li>
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
@@ -25,6 +21,10 @@
                 </ul>
             </li>
             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+
+            <!-- Pengguna -->
+            <li class="menu-header">Pengguna</li>
+            <li><a class="nav-link" href="{{ route('admin.users') }}"><i class="fas fa-users"></i> <span>Pengguna</span></a></li>            
         </ul>
     </aside>
 </div>

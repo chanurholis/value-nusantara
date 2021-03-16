@@ -10,6 +10,14 @@ Route::get('/admin', function () {
     return view('admin.index');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::name('admin.')->prefix('admin')->middleware('auth', 'verified')->group(function () {
+    Route::get('/dashboard', 'AdminController@index')->name('dashboard');
+
+    Route::resource('users', 'UserController', [
+        'names' => [
+            'index' => 'users'
+        ]
+    ]);
+});
