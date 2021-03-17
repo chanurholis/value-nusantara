@@ -122,14 +122,21 @@ class UserController extends Controller
         if ($delete == 1) {
             $success = true;
             $message = "Pengguna berhasil dihapus";
+
+            return response()->json([
+                'success' => $success,
+                'message' => $message,
+            ]);
         } else {
             $success = false;
             $message = "Pengguna tidak ditemukan";
+
+            return response()->json([
+                'success' => $success,
+                'message' => $message,
+            ]);
         }
 
-        return response()->json([
-            'success' => $success,
-            'message' => $message,
-        ]);
+        return redirect(route('admin.users'));
     }
 }
