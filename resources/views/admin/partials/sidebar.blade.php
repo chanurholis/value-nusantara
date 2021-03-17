@@ -22,6 +22,11 @@
             </li>
             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
 
+            <!-- Barang -->
+            <li class="menu-header">Barang</li>
+            <li><a class="nav-link" href="{{ route('admin.goodies') }}"><i class="fas fa-ring"></i> <span>Barang</span></a></li>                        
+            
+
             <!-- Petugas -->
             <li class="menu-header">Petugas</li>
             <li><a class="nav-link" href="{{ route('admin.officers') }}"><i class="fas fa-user"></i> <span>Petugas</span></a></li>                        
