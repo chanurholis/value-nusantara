@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <!-- CSS Libraries -->
     <!-- Template CSS -->
-    <link rel="stylesheet" href="http://localhost/TEMPLATE/stisla/assets/css/style.css">
-    <link rel="stylesheet" href="http://localhost/TEMPLATE/stisla/assets/css/components.css">
+    <link rel="stylesheet" href="http://172.20.10.3/TEMPLATE/stisla/assets/css/style.css">
+    <link rel="stylesheet" href="http://172.20.10.3/TEMPLATE/stisla/assets/css/components.css">
 
     <!-- Sweet Alert -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
@@ -40,7 +40,7 @@
                     <div class="dropdown-list-content dropdown-list-message">
                         <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-1.png" class="rounded-circle">
+                            <img alt="image" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-1.png" class="rounded-circle">
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
@@ -51,7 +51,7 @@
                         </a>
                         <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-2.png" class="rounded-circle">
+                            <img alt="image" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-2.png" class="rounded-circle">
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Dedik Sugiharto</b>
@@ -61,7 +61,7 @@
                         </a>
                         <a href="#" class="dropdown-item dropdown-item-unread">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-3.png" class="rounded-circle">
+                            <img alt="image" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-3.png" class="rounded-circle">
                             <div class="is-online"></div>
                         </div>
                         <div class="dropdown-item-desc">
@@ -72,7 +72,7 @@
                         </a>
                         <a href="#" class="dropdown-item">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-4.png" class="rounded-circle">
+                            <img alt="image" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-4.png" class="rounded-circle">
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Ardian Rahardiansyah</b>
@@ -82,7 +82,7 @@
                         </a>
                         <a href="#" class="dropdown-item">
                         <div class="dropdown-item-avatar">
-                            <img alt="image" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-5.png" class="rounded-circle">
+                            <img alt="image" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-5.png" class="rounded-circle">
                         </div>
                         <div class="dropdown-item-desc">
                             <b>Alfa Zulkarnain</b>
@@ -157,7 +157,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                        <img alt="image" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
+                        <img alt="image" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
                         <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
