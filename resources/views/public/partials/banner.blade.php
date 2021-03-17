@@ -4,7 +4,7 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="banner-caption">
                     <div class="line-dec"></div>
-                    <h2>Best Finder For You</h2>
+                    <h2>Lelang</h2>
                     <span>Suspendisse eu lorem massa. Integer sit amet posuere tellus.</span>
                     <div class="blue-button">
                         <a href="{{ route('register') }}">Getting Started</a>

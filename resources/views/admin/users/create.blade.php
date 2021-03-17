@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="form-group col-6">
-                            <label for="password2">Konfirmasi Kata Sandi</label>
+                            <label for="password2">Konfirmasi</label>
                             <input type="password" name="password_confirmation" id="password2" class="form-control @error('password') is-invalid @enderror" placeholder="Minimal 8 karakter & berisi alfanumerik">
                             <div class="invalid-feedback">
                                 @error('password') {{ $message }} @enderror

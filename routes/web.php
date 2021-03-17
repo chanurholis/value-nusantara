@@ -35,4 +35,11 @@ Route::name('admin.')->prefix('admin')->middleware('auth', 'verified')->group(fu
             'index' => 'goodies'
         ]
     ]);
+
+    // Auctions
+    Route::resource('auctions', 'AuctionController', [
+        'names' => [
+            'index' => 'auctions'
+        ]
+    ]);
 });
