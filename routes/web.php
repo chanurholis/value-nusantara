@@ -28,4 +28,11 @@ Route::name('admin.')->prefix('admin')->middleware('auth', 'verified')->group(fu
             'index' => 'officers'
         ]
     ]);
+
+    // Goodies
+    Route::resource('goodies', 'GoodsController', [
+        'names' => [
+            'index' => 'goodies'
+        ]
+    ]);
 });
