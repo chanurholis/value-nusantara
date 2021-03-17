@@ -22,6 +22,10 @@
             </li>
             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
 
+            <!-- Petugas -->
+            <li class="menu-header">Petugas</li>
+            <li><a class="nav-link" href="{{ route('admin.officers') }}"><i class="fas fa-user"></i> <span>Petugas</span></a></li>                        
+            
             <!-- Pengguna -->
             <li class="menu-header">Pengguna</li>
             <li><a class="nav-link" href="{{ route('admin.users') }}"><i class="fas fa-users"></i> <span>Pengguna</span></a></li>            

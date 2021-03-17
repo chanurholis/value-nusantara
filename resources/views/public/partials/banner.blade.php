@@ -10,7 +10,7 @@
                         <a href="{{ route('register') }}">Getting Started</a>
                     </div>
                 </div>
-                <div class="submit-form">
+                {{-- <div class="submit-form">
                     <form id="form-submit" action="" method="get">
                         <div class="row">
                             <div class="col-md-3 first-item">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
