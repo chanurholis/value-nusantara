@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="{{ asset('venue/css/fontAwesome.css') }}">
         <link rel="stylesheet" href="{{ asset('venue/css/hero-slider.css') }}">
         <link rel="stylesheet" href="{{ asset('venue/css/owl-carousel.css') }}">
-        <link rel="stylesheet" href="{{ asset('venue/css/datepicker.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('venue/css/datepicker.css') }}"> --}}
         <link rel="stylesheet" href="{{ asset('venue/css/templatemo-style.css') }}">
 
         <!-- Googleapis -->
@@ -26,7 +26,7 @@
 <body>
 
     <div class="wrap">
-        <header id="header">
+        {{-- <header id="header">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -45,5 +45,5 @@
                     </div>
                 </div>
             </div>
-        </header>
+        </header> --}}
     </div>

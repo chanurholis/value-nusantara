@@ -4,7 +4,7 @@
                 <div class="col-md-5">
                     <div class="about-veno">
                         <div class="logo">
-                            <img src="{{ asset('venue/img/footer_logo.png') }}" alt="Venue Logo">
+                            <h2>{{ config('app.name') }}</h2>
                         </div>
                         <p>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst.</p>
                         <ul class="social-icons">

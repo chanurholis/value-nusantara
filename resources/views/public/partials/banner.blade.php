@@ -4,10 +4,10 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="banner-caption">
                     <div class="line-dec"></div>
-                    <h2>Lelang</h2>
-                    <span>Suspendisse eu lorem massa. Integer sit amet posuere tellus.</span>
+                    <h2>{{ config('app.name') }}</h2>
+                    <span>Sistem Lelang Online Terpercaya Di Indonesia.</span>
                     <div class="blue-button">
-                        <a href="{{ route('register') }}">Getting Started</a>
+                        <a href="{{ route('register') }}">Mulai</a>
                     </div>
                 </div>
                 {{-- <div class="submit-form">

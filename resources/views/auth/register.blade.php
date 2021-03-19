@@ -30,14 +30,9 @@
                             @csrf
 
                                 <div class="row">
-                                    <div class="form-group col-6">
+                                    <div class="form-group col">
                                         <a href="{{ 'register/facebook' }}" class="btn btn-block btn-social btn-facebook">
                                             <span class="fab fa-facebook"></span> Facebook
-                                        </a>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <a href="{{ 'register/twitter' }}" class="btn btn-block btn-social btn-twitter">
-                                            <span class="fab fa-twitter"></span> Twitter
                                         </a>
                                     </div>
                                 </div>
