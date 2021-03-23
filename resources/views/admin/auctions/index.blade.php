@@ -14,46 +14,28 @@
         @endif
     </div>
 </div>
-<div class="card">
-    <div class="card-header">
-        <h4>Lelang <span>({{ $auctions->count() }})</span></h4>
-        <div class="card-header-action">
-            <a href="{{ route('admin.auctions.create') }}" class="btn btn-primary">Tambah <i class="fas fa-plus"></i></a>
-        </div>
+<div class="row">
+    @foreach ($auctions as $auciton)
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+        <article class="article article-style-b">
+            <div class="article-header">
+                <div class="article-image"><img src="{{ asset('goodsFile/' . $auciton->goods->photo) }}" style="max-width:100%; height:auto;"></div>
+                <div class="article-badge">
+                    <div class="article-badge-item bg-danger">Rp. {{ $auciton->goods->initial_price }}</div>
+                </div>
+            </div>
+            <div class="article-details">
+                <div class="article-title">
+                    <h2><a href="#">{{ $auciton->goods->goods }}</a></h2>
+                </div>
+                <p>{{ substr($auciton->goods->description, 0, 55) }}...</p>
+                <div class="article-cta">
+                    <a href="{{ '/admin/auctions/' . $auciton['id'] }}">Lanjut <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </article>
     </div>
-    <div class="card-body p-0">
-        <div class="table-responsive">
-            <table class="table table-striped">
-                <tbody>
-                    <th scope="col">Nama Barang</th>
-                    <th scope="col">Tanggal</th>
-                    <th scope="col">Harga Awal</th>
-                    <th scope="col">Deskripsi Barang</th>
-                    <th scope="col"></th>
-                    @foreach ($auctions as $auction)      
-                    <tr>
-                        <td>{{ $auction['auction'] }}</td>
-                        <td>{{ $auction['date'] }}</td>
-                        <td>{{ $auction['initial_price'] }}</td>
-                        <td>{{ $auction['description'] }}</td>
-                        <td class="text-right">
-                            <a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $auction['id'] }})"><i class="fa fa-trash"></i></a>
-                            <a href="{{ '/admin/auctions/' . $auction['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                            <a href="{{ '/admin/auctions/' . $auction['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="card-footer text-right">
-        <nav class="d-inline-block">
-            <ul class="pagination mb-0">
-                {{-- {{ $auctions->links() }} --}}
-            </ul>
-        </nav>
-    </div>
+    @endforeach
 </div>
 
 <script>

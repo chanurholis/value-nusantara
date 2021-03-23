@@ -14,9 +14,33 @@
         @endif
     </div>
 </div>
+{{-- <div class="row">
+    @foreach ($goodies as $goods)
+    <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+        <article class="article article-style-b">
+            <div class="article-header">
+                <div class="article-image"><img src="{{ asset('goodsFile/' . $goods['photo']) }}" style="max-width:100%; height:auto;"></div>
+                <div class="article-badge">
+                    <div class="article-badge-item bg-danger"><i class="fas fa-fire"></i> Trending</div>
+                </div>
+            </div>
+            <div class="article-details">
+                <div class="article-title">
+                    <h2><a href="#">{{ $goods['goods'] }}</a></h2>
+                </div>
+                <p>{{ substr($goods['description'], 0, 55) }}...</p>
+                <div class="article-cta">
+                    <a href="{{ '/admin/goodies/' . $goods['id'] }}">Lanjut <i class="fas fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </article>
+    </div>
+    @endforeach
+</div> --}}
+
 <div class="card">
     <div class="card-header">
-        <h4>Barang <span>({{ $goodies->count() }})</span></h4>
+        <h4>Pengguna <span>({{ $goodies->count() }})</span></h4>
         <div class="card-header-action">
             <a href="{{ route('admin.goodies.create') }}" class="btn btn-primary">Tambah <i class="fas fa-plus"></i></a>
         </div>
@@ -26,19 +50,13 @@
             <table class="table table-striped">
                 <tbody>
                     <th scope="col">Nama Barang</th>
-                    <th scope="col">Tanggal</th>
                     <th scope="col">Harga Awal</th>
-                    <th scope="col">Deskripsi Barang</th>
                     <th scope="col"></th>
                     @foreach ($goodies as $goods)      
                     <tr>
                         <td>{{ $goods['goods'] }}</td>
-                        <td>{{ $goods['date'] }}</td>
-                        <td>{{ $goods['initial_price'] }}</td>
-                        <td>{{ $goods['description'] }}</td>
+                        <td>Rp. {{ $goods['initial_price'] }}</td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $goods['id'] }})"><i class="fa fa-trash"></i></a>
-                            <a href="{{ '/admin/goodies/' . $goods['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                             <a href="{{ '/admin/goodies/' . $goods['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
                         </td>
                     </tr>
@@ -55,42 +73,4 @@
         </nav>
     </div>
 </div>
-
-<script>
-    function deleteConfirmation(id) {
-    swal({
-        title: "Hapus Pengguna?",
-        text: "Harap pastikan dan konfirmasi!",
-        type: "warning",
-        showCancelButton: !0,
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: "Tidak, jangan!",
-        reverseButtons: !0
-    }).then(function (e) {
-        if (e.value === true) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                type: 'DELETE',
-                url: "{{url('/admin/goodies/')}}/" + id,
-                data: {
-                    _token: CSRF_TOKEN
-                },
-                dataType: 'JSON',
-                success: function (results) {
-                    if (results.success === true) {
-                        swal("Berhasil!", results.message, "success");
-                    } else {
-                        swal("Gagal!", results.message, "error");
-                    }
-                }
-            });
-        } else {
-            e.dismiss;
-        }
-    }, function (dismiss) {
-        return false;
-    })
-}
-</script>
-
 @endsection

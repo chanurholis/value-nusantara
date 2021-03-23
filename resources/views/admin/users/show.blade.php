@@ -13,7 +13,7 @@
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <th scope="col">Name</th>
+                    <th scope="col">Nama</th>
                     <td>{{ $model['name'] }}</td>
                 </tr>
                 <tr>

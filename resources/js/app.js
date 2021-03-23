@@ -4,6 +4,11 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import 'dropzone';
+var myDropzone = new Dropzone("#photo", {
+    url: "/file/post"
+});
+
 require('./bootstrap');
 
 window.Vue = require('vue');

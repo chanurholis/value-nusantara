@@ -15,8 +15,9 @@ class CreateAuctionsTable extends Migration
     {
         Schema::create('auctions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('auction_id');
-            $table->date('auction_date');
+            $table->unsignedBigInteger('goods_id');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->string('final_price');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('officer_id');

@@ -1,8 +1,8 @@
 @extends('layouts.admin-master')
 
-@section('title', 'Barang Baru')
+@section('title', 'Lelang Baru')
 
-@section('title-header', 'Barang Baru')
+@section('title-header', 'Lelang Baru')
 
 @section('content')
 <div class="row">
@@ -13,34 +13,23 @@
         </div>
         @endif
         <div class="card">
-            <form action="{{ route('admin.goodies.store') }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('admin.auctions.store') }}" method="post">
                 @csrf
                 <div class="card-body">
 
-                    {{-- <div class="row">
-                        <div class="form-group col">
-                            <label class="col-form-label">Foto</label>
-                            <div id="image-preview" class="image-preview">
-                                <label for="image-upload" id="image-label">Choose File</label>
-                                <input type="file" name="photo" id="image-upload" />
-                            </div>
-                        </div>
-                    </div> --}}
-
                     <div class="row">
                         <div class="form-group col">
-                            <label for="photo">Foto</label>
-                            <input type="file" name="photo" id="photo" class="form-control @error('photo') is-invalid @enderror">
-                            <div class="invalid-feedback">
-                                @error('photo') {{ $message }} @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="goods">Nama Barang</label>
-                            <input type="text" id="goods" value="{{ old('goods') }}" name="goods" class="form-control @error('goods') is-invalid @enderror" placeholder="Nama Barang" autofocus>
+                            <label for="goods">Barang</label>
+                            <select name="goods_id" id="goods" class="form-control @error('goods_id') is-invalid @enderror">
+                                <option value="">-- Pilih Barang --</option>
+                                @foreach ($goodies as $goods)
+                                    @if (old('goods_id') == $goods->id)
+                                        <option value="{{ $goods->id }}" selected>{{ $goods->goods }}</option>
+                                    @else 
+                                        <option value="{{ $goods->id }}">{{ $goods->goods }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                             <div class="invalid-feedback">
                                 @error('goods') {{ $message }} @enderror
                             </div>
@@ -49,26 +38,35 @@
 
                     <div class="row">
                         <div class="form-group col">
-                            <label for="initial_price">Harga Awal</label>
-                            <input type="text" id="initial_price" value="{{ old('initial_price') }}" name="initial_price" class="form-control @error('initial_price') is-invalid @enderror" placeholder="Rp. 000.000">
+                            <label for="start_date">Tanggal Mulai</label>
+                            <input type="date" id="start_date" value="{{ old('start_date'), date('Y-m-d') }}" name="start_date" class="form-control @error('start_date') is-invalid @enderror">
                             <div class="invalid-feedback">
-                                @error('initial_price')
-                                    {{ $message }}
-                                @enderror
+                                @error('start_date') {{ $message }} @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group col">
-                            <label for="description">Deskripsi Barang</label>
-                            <textarea name="description" id="description" class="form-control @error('initial_price') is-invalid @enderror" placeholder="Deskripsi Barang">{{ old('description') }}</textarea>
+                            <label for="end_date">Tanggal Selesai</label>
+                            <input type="date" id="end_date" value="{{ old('end_date'), date('Y-m-d') }}" name="end_date" class="form-control @error('end_date') is-invalid @enderror">
                             <div class="invalid-feedback">
-                                @error('description') {{ $message }} @enderror
+                                @error('end_date') {{ $message }} @enderror
                             </div>
                         </div>
-
                     </div>
+
+                    {{-- <div class="row">
+                        <div class="form-group col">
+                            <label for="final_price">Harga Akhir</label>
+                            <input type="text" id="final_price" value="{{ old('final_price') }}" name="final_price" class="form-control @error('final_price') is-invalid @enderror" placeholder="Rp. 000.000">
+                            <div class="invalid-feedback">
+                                @error('final_price')
+                                    {{ $message }}
+                                @enderror
+                            </div>
+                        </div>
+                    </div> --}}
 
                     <div class="form-group row mb-4 float-right">
                         <div class="col-sm-12 col-md-7 float-right">
@@ -82,7 +80,7 @@
 </div>
 
 <script type="text/javascript">
-    var rupiah = document.getElementById('initial_price');
+    var rupiah = document.getElementById('final_price');
     rupiah.addEventListener('keyup', function(e){
         rupiah.value = formatRupiah(this.value, 'Rp. ');
     });

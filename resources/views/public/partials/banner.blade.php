@@ -10,10 +10,10 @@
                         <a href="{{ route('register') }}">Mulai</a>
                     </div>
                 </div>
-                {{-- <div class="submit-form">
+                <div class="submit-form">
                     <form id="form-submit" action="" method="get">
                         <div class="row">
-                            <div class="col-md-3 first-item">
+                            {{-- <div class="col-md-3 first-item">
                                 <fieldset>
                                     <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
                                 </fieldset>
@@ -41,10 +41,10 @@
                                 <fieldset>
                                     <button type="submit" id="form-submit" class="btn">Search Now</button>
                                 </fieldset>
-                            </div>
+                            </div> --}}
                         </div>
                     </form>
-                </div> --}}
+                </div>
             </div>
         </div>
     </div>

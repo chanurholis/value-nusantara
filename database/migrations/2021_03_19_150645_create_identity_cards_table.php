@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGoodsTable extends Migration
+class CreateIdentityCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,15 @@ class CreateGoodsTable extends Migration
      */
     public function up()
     {
-        Schema::create('goods', function (Blueprint $table) {
+        Schema::create('identity_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('goods');
-            $table->string('initial_price');
-            $table->text('description');
+            $table->string('nik');
+            $table->string('place_of_birth');
+            $table->date('date_of_birth');
+            $table->string('gender');
+            $table->string('profession');
+            $table->string('province');
+            $table->string('districts');
             $table->string('photo');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
@@ -31,6 +35,6 @@ class CreateGoodsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('goods');
+        Schema::dropIfExists('identity_cards');
     }
 }

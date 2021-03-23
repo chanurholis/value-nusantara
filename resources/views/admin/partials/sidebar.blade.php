@@ -25,10 +25,19 @@
             <!-- Barang -->
             <li class="menu-header">Barang</li>
             <li><a class="nav-link" href="{{ route('admin.goodies') }}"><i class="fas fa-ring"></i> <span>Barang</span></a></li>                        
+            <li><a class="nav-link" href="{{ route('admin.goodies.create') }}"><i class="fas fa-plus"></i> <span>Tambah Barang</span></a></li>                        
 
             <!-- Lelang -->
             <li class="menu-header">Lelang</li>
             <li><a class="nav-link" href="{{ route('admin.auctions') }}"><i class="fas fa-gavel"></i> <span>Lelang</span></a></li>                                    
+            <li><a class="nav-link" href="{{ route('admin.auctions.create') }}"><i class="fas fa-plus"></i> <span>Permohonan Lelang</span></a></li>                                    
+
+            <!-- Persyaratan Lelalng -->
+            <li class="menu-header">Persyaratan Lelang</li>
+            <li><a class="nav-link" href="{{ route('admin.officers') }}"><i class="fa fa-id-card"></i> <span>KTP</span></a></li>                        
+            <li><a class="nav-link" href="{{ route('admin.officers') }}"><i class="fa fa-id-badge"></i> <span>NPWP</span></a></li>                        
+            <li><a class="nav-link" href="{{ route('admin.officers') }}"><i class="fa fa-file-invoice-dollar"></i> <span>Rekening Bank</span></a></li>                        
+            
 
             <!-- Petugas -->
             <li class="menu-header">Petugas</li>

@@ -41,9 +41,20 @@ return [
             'provider' => 'users',
         ],
 
+        'officer' => [
+            'driver' => 'session',
+            'provider' => 'officers'
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+            'hash' => false,
+        ],
+
+        'officer-api' => [
+            'driver' => 'token',
+            'provider' => 'officers',
             'hash' => false,
         ],
     ],
@@ -68,13 +79,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model'  => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'officers' => [
+            'driver' => 'eloquent',
+            'model'  => App\Officer::class,
+        ],
     ],
 
     /*
@@ -95,8 +106,8 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
-            'table' => 'password_resets',
-            'expire' => 60,
+            'table'    => 'password_resets',
+            'expire'   => 60,
             'throttle' => 60,
         ],
     ],

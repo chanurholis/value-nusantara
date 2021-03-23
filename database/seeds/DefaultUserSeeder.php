@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
 
 class DefaultUserSeeder extends Seeder
 {
@@ -13,6 +14,8 @@ class DefaultUserSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create('id_ID');
+
         $email    = 'chachanurholis29@gmail.com';
         $password = 'p@ssw0rd';
 
@@ -23,7 +26,8 @@ class DefaultUserSeeder extends Seeder
             'name'              => "Chacha Nurholis",
             'email'             => $email,
             'password'          => Hash::make($password),
-            'email_verified_at' => now()
+            'email_verified_at' => now(),
+            'phone_number'      => $faker->phoneNumber
         ];
 
         if (!$user) {

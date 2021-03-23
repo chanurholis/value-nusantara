@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{ config('app.name') }} &mdash; @yield('title')</title>
+        <title>{{ config('app.name') }} &mdash; Lelang Online</title>
 
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,17 +25,12 @@
 
 <body>
 
-    <div class="wrap">
-        {{-- <header id="header">
+    {{-- <div class="wrap">
+        <header id="header">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <button id="primary-nav-button" type="button">Menu</button>
-                        <a href="index.html">
-                            <div class="logo">
-                                <img src="{{ asset('venue/img/logo.png') }}" alt="Venue Logo">
-                            </div>
-                        </a>
                         <nav id="primary-nav" class="dropdown cf">
                             <ul class="dropdown menu">
                                 <li><a href="{{ route('register') }}">Daftar</a></li>
@@ -45,5 +40,5 @@
                     </div>
                 </div>
             </div>
-        </header> --}}
-    </div>
+        </header>
+    </div> --}}

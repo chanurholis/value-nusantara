@@ -16,6 +16,7 @@ class CreateOfficersTable extends Migration
         Schema::create('officers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email');
             $table->string('username');
             $table->string('password');
             $table->unsignedBigInteger('level_id');

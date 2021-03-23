@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Auction;
+use App\Goods;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuctionController extends Controller
 {
@@ -26,7 +28,11 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        //
+        $goodies = Goods::where('user_id', Auth::user()->id)->get();
+
+        return view('admin.auctions.create', [
+            'goodies' => $goodies
+        ]);
     }
 
     /**
@@ -37,7 +43,33 @@ class AuctionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'goods_id'    => 'required|numeric',
+            'start_date'  => 'required|date',
+            'end_date'    => 'required|date',
+            // 'final_price' => 'required',
+            'user_id'     => 'numneric',
+            'officer_id'  => 'numeric'
+        ]);
+
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $goodies = Goods::where('id', $data['goods_id'])->get();
+
+        foreach ($goodies as $goods) {
+            $initial_price = $goods->initial_price;
+        }
+
+        $data['final_price'] = str_replace("Rp. ", "", $initial_price);
+        $data['user_id']     = Auth::user()->id;
+        $data['officer_id']  = 1;
+
+        Auction::create($data);
+
+        return redirect(route('admin.auctions.create'))->with('status', 'Permohonan Lelang berhasil dibuat!');
     }
 
     /**
@@ -48,7 +80,9 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        //
+        return view('admin.auctions.show', [
+            'model' => $auction
+        ]);
     }
 
     /**

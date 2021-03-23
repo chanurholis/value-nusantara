@@ -37,7 +37,7 @@
                         </div>
                     </div>
 
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="form-group col">
                             <label for="email">Surel</label>
                             <input type="text" id="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="surel@contoh.com">
@@ -45,7 +45,7 @@
                                 @error('email') {{ $message }} @enderror
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
 
                     <div class="row">
                         <div class="form-group col">

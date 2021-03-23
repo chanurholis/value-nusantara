@@ -42,10 +42,11 @@ class OfficerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'name'     => 'required|string|max:255',
             'username' => 'required|string|alpha_dash|unique:officers',
             'level_id' => 'required|numeric',
-            'password' => 'required|confirmed|string|min:8'
+            'password' => 'required|confirmed|string|min:8',
+            'email'    => 'required|email|unique:officers'
         ]);
 
         $data = [];
