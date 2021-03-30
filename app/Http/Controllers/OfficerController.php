@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Level;
-use App\Officer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Officer;
 
 class OfficerController extends Controller
 {
@@ -28,7 +27,7 @@ class OfficerController extends Controller
      */
     public function create()
     {
-        $levels = Level::all();
+        $levels = [1 => 'Administrator', 2 => 'Officer'];
 
         return view('admin.officers.create', compact('levels'));
     }
@@ -42,11 +41,13 @@ class OfficerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'     => 'required|string|max:255',
-            'username' => 'required|string|alpha_dash|unique:officers',
-            'level_id' => 'required|numeric',
-            'password' => 'required|confirmed|string|min:8',
-            'email'    => 'required|email|unique:officers'
+            'first_name'   => 'required|string|max:255',
+            'last_name'    => 'required|string|max:255',
+            'name'         => 'string|max:255',
+            'level_id'     => 'required|numeric',
+            'password'     => 'required|confirmed|string|min:8',
+            'email'        => 'required|email|unique:officers',
+            'phone_number' => 'required|numeric|min:8|unique:officers'
         ]);
 
         $data = [];
@@ -57,6 +58,7 @@ class OfficerController extends Controller
         unset($data['password_confirmation']);
 
         $data['password'] = Hash::make($request['password']);
+        $data['name']     = $data['first_name'] . ' ' . $data['last_name'];
 
         Officer::create($data);
 
@@ -103,8 +105,10 @@ class OfficerController extends Controller
      * @param  \App\Officer  $officer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Officer $officer)
+    public function destroy($id)
     {
-        //
+        Officer::destroy($id);
+
+        return redirect(route('admin.officers'))->with('status', 'Petugas berhasil dihapus!');
     }
 }

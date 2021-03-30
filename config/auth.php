@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard'     => 'web',
         'passwords' => 'users',
     ],
 
@@ -37,25 +37,25 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver'   => 'session',
             'provider' => 'users',
         ],
 
         'officer' => [
-            'driver' => 'session',
-            'provider' => 'officers'
+            'driver'   => 'session',
+            'provider' => 'officers',
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver'   => 'token',
             'provider' => 'users',
-            'hash' => false,
+            'hash'     => false,
         ],
 
         'officer-api' => [
-            'driver' => 'token',
+            'driver'   => 'token',
             'provider' => 'officers',
-            'hash' => false,
+            'hash'     => false,
         ],
     ],
 
@@ -106,6 +106,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table'    => 'password_resets',
+            'expire'   => 60,
+            'throttle' => 60,
+        ],
+
+        'officers' => [
+            'provider' => 'officers',
             'table'    => 'password_resets',
             'expire'   => 60,
             'throttle' => 60,

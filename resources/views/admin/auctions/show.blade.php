@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <th scope="col">Petugas</th>
-                            <td>{{ $model->officer->name }}</td>
+                            <td>{{ $model->officer }}</tdchr>
                         </tr>
                         <tr>
                             <th scope="col">Dibuat</th>
@@ -46,7 +46,7 @@
                         </tr>
                         <tr>
                             <th scope="col">Status</th>
-                            <td>{{ $model->status }}</td>
+                            <td>@if ($model['status'] == 'opened') <div class="badge badge-success">{{ auction_status($model['status']) }}</div> @else <div class="badge badge-warning">{{ auction_status($model['status']) }}</div> @endif</td>
                         </tr>
                         <tr>
                             <th scope="col"></th>
@@ -59,7 +59,7 @@
     </div>
     <div class="col-12 col-md-12 col-lg-6">
         <div class="card">
-            <form action="{{ '/admin/goodies/' . $model->id }}" method="post" enctype="multipart/form-data">
+            <form action="{{ '/admin/auctions/' . $model->id }}" method="post" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
                 <div class="card-body">
@@ -67,7 +67,7 @@
                     <div class="row">
                         <div class="form-group col">
                             <label for="start_date">Tanggal Mulai</label>
-                            <input type="date" name="start_date" id="start_date" class="form-control @error('start_date') @enderror" value="{{ $model->start_date, date('Y-m-d') }}">
+                            <input type="date" name="start_date" id="start_date" class="form-control @error('start_date') is-invalid @enderror" value="{{ $model->start_date, date('Y-m-d') }}">
                             <div class="invalid-feddback">
                                 @error('start_date') {{ $message }} @enderror
                             </div>
@@ -77,54 +77,27 @@
                     <div class="row">
                         <div class="form-group col">
                             <label for="end_date">Tanggal Selesai</label>
-                            <input type="date" name="end_date" id="end_date" class="form-control @error('start_date') @enderror" value="{{ $model->end_date, date('Y-m-d') }}">
+                            <input type="date" name="end_date" id="end_date" class="form-control @error('end_date') is-invalid @enderror" value="{{ $model->end_date, date('Y-m-d') }}">
                             <div class="invalid-feddback">
-                                @error('start_date') {{ $message }} @enderror
+                                @error('end_date') {{ $message }} @enderror
                             </div>
                         </div>
                     </div>
 
-                    {{-- <div class="row">
+                    <div class="row">
                         <div class="form-group col">
-                            <label for="photo">Foto</label>
-                            <input type="file" name="photo" id="phto" class="form-control @error('photo') is-invalid @enderror">
-                            <div class="invalid-feedback">
-                                @error('photo') {{ $message }} @enderror
-                            </div>
+                            <label for="status">Status</label>
+                            <select name="status" id="status" class="form-control @error('status') is-invalid @enderror">
+                                @foreach ($status as $item)
+                                    @if ($model->status == $item)
+                                        <option value="{{ $item }}" selected>{{ auction_status($item) }}</option>
+                                    @else 
+                                        <option value="{{ $item }}">{{ auction_status($item) }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </div>
-                    </div> --}}
-
-                    {{-- <div class="row">
-                        <div class="form-group col">
-                            <label for="goods">Nama Barang</label>
-                            <input type="text" id="goods" value="{{ $model->goods }}" name="goods" class="form-control @error('goods') is-invalid @enderror" placeholder="Nama Barang" autofocus>
-                            <div class="invalid-feedback">
-                                @error('goods') {{ $message }} @enderror
-                            </div>
-                        </div>
-                    </div> --}}
-
-                    {{-- <div class="row">
-                        <div class="form-group col">
-                            <label for="initial_price">Harga Awal</label>
-                            <input type="text" id="initial_price" value="Rp. {{ $model->initial_price }}" name="initial_price" class="form-control @error('initial_price') is-invalid @enderror" placeholder="Rp. 000.000">
-                            <div class="invalid-feedback">
-                                @error('initial_price')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                        </div>
-                    </div> --}}
-
-                    {{-- <div class="row">
-                        <div class="form-group col">
-                            <label for="description">Deskripsi Barang</label>
-                            <textarea name="description" id="description" class="form-control @error('initial_price') is-invalid @enderror" placeholder="Deskripsi Barang">{{ $model->description }}</textarea>
-                            <div class="invalid-feedback">
-                                @error('description') {{ $message }} @enderror
-                            </div>
-                        </div>
-                    </div> --}}
+                    </div>
 
                     <div class="form-group row mb-4 float-right">
                         <div class="col-sm-12 col-md-7 float-right">

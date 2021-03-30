@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Level;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Officer extends Model
+class Officer extends Authenticatable
 {
     protected $guarded = [];
 

@@ -14,8 +14,8 @@ class CreateLevelsTable extends Migration
     public function up()
     {
         Schema::create('levels', function (Blueprint $table) {
-            $table->id();
-            $table->enum('level', ['Administrator', 'Officer']);
+            $table->char('id')->primary();
+            $table->enum('level', ['Administrator', 'Officer', 'Society']);
             $table->timestamps();
         });
     }

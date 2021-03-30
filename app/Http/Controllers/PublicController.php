@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Auction;
-use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
@@ -14,8 +13,28 @@ class PublicController extends Controller
 
     public function index()
     {
-        $auctions = Auction::all();
+        return view('public.index');
+    }
 
-        return view('layouts.public-master', compact('auctions'));
+    public function about()
+    {
+        return view('public.about');
+    }
+
+    public function auction()
+    {
+        $auctions = Auction::where('status', 'opened')->get();
+
+        return view('public.auction', compact('auctions'));
+    }
+
+    public function contact()
+    {
+        return view('public.contact');
+    }
+
+    public function term_of_use()
+    {
+        return view('public.term-of-use');
     }
 }

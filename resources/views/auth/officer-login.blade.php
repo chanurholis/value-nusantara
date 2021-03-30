@@ -39,7 +39,7 @@
                                         <div class="d-block">
                                             <label for="password" class="control-label">Kata Sandi</label>
                                         <div class="float-right">
-                                            <a href="{{ route('password.request') }}" class="text-small">Lupa Kata Sandi?</a>
+                                            {{-- <a href="{{ route('officers.password.request') }}" class="text-small">Lupa Kata Sandi?</a> --}}
                                         </div>
                                         </div>
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" tabindex="2">

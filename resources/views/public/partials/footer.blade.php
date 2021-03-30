@@ -1,78 +1,82 @@
-<footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5">
-                    <div class="about-veno">
-                        <div class="logo">
-                            <h2>{{ config('app.name') }}</h2>
+        <div class="page-footer-section bg-dark fg-white">
+            <div class="container">
+                <div class="row mb-5 py-3">
+                    <div class="col-sm-6 col-lg-2 py-3">
+                    <h5 class="mb-3">Pages</h5>
+                    <ul class="menu-link">
+                        <li><a href="#" class="">Features</a></li>
+                        <li><a href="#" class="">Customers</a></li>
+                        <li><a href="#" class="">Pricing</a></li>
+                        <li><a href="#" class="">GDPR</a></li>
+                    </ul>
+                    </div>
+                    <div class="col-sm-6 col-lg-2 py-3">
+                    <h5 class="mb-3">Company</h5>
+                    <ul class="menu-link">
+                        <li><a href="#" class="">About</a></li>
+                        <li><a href="#" class="">Team</a></li>
+                        <li><a href="#" class="">Leadership</a></li>
+                        <li><a href="#" class="">Careers</a></li>
+                        <li><a href="#" class="">HIRING!</a></li>
+                    </ul>
+                    </div>
+                    <div class="col-md-6 col-lg-4 py-3">
+                    <h5 class="mb-3">Contact</h5>
+                    <ul class="menu-link">
+                        <li><a href="#" class="">Contact Us</a></li>
+                        <li><a href="#" class="">Office Location</a></li>
+                        <li><a href="#" class="">hello@mobster.com</a></li>
+                        <li><a href="#" class="">support@macodeid.com</a></li>
+                        <li><a href="#" class="">+808 11233 900</a></li>
+                    </ul>
+                    </div>
+                    <div class="col-md-6 col-lg-4 py-3">
+                    <h5 class="mb-3">Subscribe</h5>
+                    <p>Get some offers, news, or update features of application</p>
+                    <form method="POST">
+                        <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Your email..">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-primary"><span class="mai-send"></span></button>
                         </div>
-                        <p>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst.</p>
-                        <ul class="social-icons">
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><i class="fa fa-rss"></i></a>
-                                <a href="#"><i class="fa fa-dribbble"></i></a>
-                            </li>
-                        </ul>
+                        </div>
+                    </form>
+            
+                    <!-- Social Media Button -->
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-facebook"></span></a>
+                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-twitter"></span></a>
+                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-instagram"></span></a>
+                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-google"></span></a>
+                    </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="useful-links">
-                        <div class="footer-heading">
-                            <h4>Useful Links</h4>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Help FAQs</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Register</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Login</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>My Profile</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>How It Works?</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>More About Us</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-md-6">
-                                <ul>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Our Clients</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Partnerships</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Blog Entries</a></li>
-                                    <li><a href="#"><i class="fa fa-stop"></i>Contact Us</a></li>
-                                </ul>
-                            </div>
-                        </div>
+            </div>
+        
+            <hr>
+        
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 py-2">
+                    <img src="img/favicon-light.png" alt="" width="40">
+                    <!-- Please don't remove or modify the credits below -->
+                    <p class="d-inline-block ml-2">Copyright &copy; <a href="" class="fg-white fw-medium">{{ config('app.name') }}</a>. All rights reserved</p>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="contact-info">
-                        <div class="footer-heading">
-                            <h4>Contact Information</h4>
-                        </div>
-                        <p>Praesent iaculis gravida elementum. Proin fermentum neque facilisis semper pharetra. Sed vestibulum vehicula tincidunt.</p>
-                        <ul>
-                            <li><span>Phone:</span><a href="#">010-050-0550</a></li>
-                            <li><span>Email:</span><a href="#">hi@company.co</a></li>
-                            <li><span>Address:</span><a href="#">company.co</a></li>
-                        </ul>
+                    <div class="col-12 col-md-6 py-2">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item"><a href="/term-of-use" class="nav-link">Term of Use</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Privacy Policy</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Cookie Policy</a></li>
+                    </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </footer>
 
-    <div class="sub-footer">
-        <p>Copyright &copy; {{ date('Y') }} {{ config('app.name') }} | <a href="https://chanurholis.github.io" target="_blank">Chacha Nurholis</a></p>
-    </div>
+        <script src="{{ asset('mobster/assets/js/jquery-3.5.1.min.js') }}"></script>
+        <script src="{{ asset('mobster/assets/vendor/owl-carousel/js/owl.carousel.min.js') }}"></script>
+        <script src="{{ asset('mobster/assets/vendor/wow/wow.min.js') }}"></script>
+        <script src="{{ asset('mobster/assets/js/mobster.js') }}"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
-    <script>window.jQuery || document.write('<script src="venue/js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
-
-    <script src="{{ asset('venue/js/vendor/bootstrap.min.js') }}"></script>
-
-    <script src="{{ asset('venue/js/datepicker.js') }}"></script>
-    <script src="{{ asset('venue/js/plugins.js') }}"></script>
-    <script src="{{ asset('venue/js/main.js') }}"></script>
-</body>
+    </body>
 </html>

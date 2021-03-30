@@ -3,7 +3,6 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Faker\Factory as Faker;
 
 class DefaultUserSeeder extends Seeder
 {
@@ -14,20 +13,24 @@ class DefaultUserSeeder extends Seeder
      */
     public function run()
     {
-        $faker = Faker::create('id_ID');
-
-        $email    = 'chachanurholis29@gmail.com';
-        $password = 'p@ssw0rd';
+        $first_name     = 'Chacha';
+        $last_name      = 'Nurholis';
+        $email          = 'chachanurholis29@gmail.com';
+        $password       = 'p@ssw0rd';
+        $phone_number   = '081243215432';
 
         $this->command->line("");
         $this->command->line("Create Default User...");
         $user     = User::where('email', $email)->first();
         $dataUser = [
-            'name'              => "Chacha Nurholis",
+            'first_name'        => $first_name,
+            'last_name'         => $last_name,
+            'name'              => $first_name . ' ' . $last_name,
             'email'             => $email,
             'password'          => Hash::make($password),
             'email_verified_at' => now(),
-            'phone_number'      => $faker->phoneNumber
+            'phone_number'      => $phone_number,
+            'term_of_use'       => 'on'
         ];
 
         if (!$user) {
@@ -36,8 +39,8 @@ class DefaultUserSeeder extends Seeder
             $user->update($dataUser);
         }
 
-        $this->command->line(" + Email: " .  $dataUser['email']);
-        $this->command->line(" + Password: {$password}");
+        $this->command->line(" + Email    : " .  $dataUser['email']);
+        $this->command->line(" + Password : {$password}");
         $this->command->line("");
     }
 }

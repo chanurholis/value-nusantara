@@ -1,6 +1,6 @@
 @extends('layouts.admin-master')
 
-@section('title', 'Barang Baru')
+@section('title', '| Barang Baru')
 
 @section('title-header', 'Barang Baru')
 
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="form-group col">
                             <label for="description">Deskripsi Barang</label>
-                            <textarea name="description" id="description" class="form-control @error('initial_price') is-invalid @enderror" placeholder="Deskripsi Barang">{{ old('description') }}</textarea>
+                            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" placeholder="Deskripsi Barang">{{ old('description') }}</textarea>
                             <div class="invalid-feedback">
                                 @error('description') {{ $message }} @enderror
                             </div>

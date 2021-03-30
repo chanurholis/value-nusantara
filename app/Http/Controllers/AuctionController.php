@@ -6,6 +6,7 @@ use App\Auction;
 use App\Goods;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class AuctionController extends Controller
 {
@@ -16,7 +17,7 @@ class AuctionController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::all();
+        $auctions = Auction::where('user_id', Auth::user()->id)->get();
 
         return view('admin.auctions.index', compact('auctions'));
     }
@@ -28,10 +29,11 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        $goodies = Goods::where('user_id', Auth::user()->id)->get();
+        // $goodies = Goods::where('user_id', Auth::user()->id)->get();
+        $goodies = Goods::whereNotIn('id', Auction::get('goods_id'))->get();
 
         return view('admin.auctions.create', [
-            'goodies' => $goodies
+            'goodies'  => $goodies
         ]);
     }
 
@@ -44,10 +46,9 @@ class AuctionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'goods_id'    => 'required|numeric',
+            'goods_id'    => 'required|numeric|unique:auctions',
             'start_date'  => 'required|date',
             'end_date'    => 'required|date',
-            // 'final_price' => 'required',
             'user_id'     => 'numneric',
             'officer_id'  => 'numeric'
         ]);
@@ -66,6 +67,7 @@ class AuctionController extends Controller
         $data['final_price'] = str_replace("Rp. ", "", $initial_price);
         $data['user_id']     = Auth::user()->id;
         $data['officer_id']  = 1;
+        $data['status']      = 'closed';
 
         Auction::create($data);
 
@@ -80,8 +82,11 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
+        $status = ['opened', 'closed'];
+
         return view('admin.auctions.show', [
-            'model' => $auction
+            'model'  => $auction,
+            'status' => $status
         ]);
     }
 
@@ -93,7 +98,7 @@ class AuctionController extends Controller
      */
     public function edit(Auction $auction)
     {
-        //
+        dd($auction);
     }
 
     /**
@@ -105,7 +110,20 @@ class AuctionController extends Controller
      */
     public function update(Request $request, Auction $auction)
     {
-        //
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date'   => 'required|date',
+            'status'     => 'required'
+        ]);
+
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $auction->update($data);
+
+        redirect('/admin/auction/' . $auction->id)->with('status', 'Lelang berhasil diperbarui!');
     }
 
     /**
@@ -117,5 +135,13 @@ class AuctionController extends Controller
     public function destroy(Auction $auction)
     {
         //
+    }
+
+    public function export()
+    {
+        $auctions = Auction::all();
+
+        $pdf = PDF::loadview('admin.auctions.export', compact('auctions'))->setPaper('A4', 'potrait');
+        return $pdf->stream('Laporan-Lelang');
     }
 }

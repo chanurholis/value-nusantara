@@ -1,51 +1,23 @@
-<section class="banner" id="top">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="banner-caption">
-                    <div class="line-dec"></div>
-                    <h2>{{ config('app.name') }}</h2>
-                    <span>Sistem Lelang Online Terpercaya Di Indonesia.</span>
-                    <div class="blue-button">
-                        <a href="{{ route('register') }}">Mulai</a>
-                    </div>
+<div class="page-hero-section bg-image hero-home-2" style="background-image: url(/mobster/assets/img/bg_hero_2.svg);">
+    <div class="hero-caption">
+        <div class="container fg-white h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-lg-6 wow fadeInUp">
+                    <div class="badge badge-soft mb-2">#1 Lelang Online {{ date('Y') }}</div>
+                    <h1 class="mb-4 fw-normal"><b>Value Nusantara</b> Lelang Online</h1>
+                    <p class="mb-4">
+                        Berinovasi untuk mempermudah <b>Lelang</b> Anda.
+                    </p>
+
+                    <a href="{{ route('login') }}" class="btn btn-dark rounded-pill">Mulai</a>
+
                 </div>
-                <div class="submit-form">
-                    <form id="form-submit" action="" method="get">
-                        <div class="row">
-                            {{-- <div class="col-md-3 first-item">
-                                <fieldset>
-                                    <input name="name" type="text" class="form-control" id="name" placeholder="Your name..." required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-md-3 second-item">
-                                <fieldset>
-                                    <input name="location" type="text" class="form-control" id="location" placeholder="Type location..." required="">
-                                </fieldset>
-                            </div>
-                            <div class="col-md-3 third-item">
-                                <fieldset>
-                                    <select required name='category' onchange='this.form.()'>
-                                        <option value="">Select category...</option>
-                                        <option value="Shops">Shops</option>
-                                        <option value="Hotels">Hotels</option>
-                                        <option value="Restaurants">Restaurants</option>
-                                        <option value="Events">Events</option>
-                                        <option value="Meetings">Meetings</option>
-                                        <option value="Fitness">Fitness</option>
-                                        <option value="Cafes">Cafes</option>
-                                    </select>
-                                </fieldset>
-                            </div>
-                            <div class="col-md-3">
-                                <fieldset>
-                                    <button type="submit" id="form-submit" class="btn">Search Now</button>
-                                </fieldset>
-                            </div> --}}
-                        </div>
-                    </form>
+                <div class="col-lg-6 d-none d-lg-block wow zoomIn">
+                    <div class="img-place floating-animate">
+                        <img src="{{ asset('img/hero-banner.svg') }}" alt="">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>

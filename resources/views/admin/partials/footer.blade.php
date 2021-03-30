@@ -1,6 +1,6 @@
                 <footer class="main-footer">
                     <div class="footer-left">
-                        Copyright &copy; {{ date('Y') }} {{ config('app.name') }} <a href="https://chanurholis.github.io" target="_blank">Chacha Nurholis</a>
+                        Copyright &copy; {{ date('Y') }} <a href="">{{ config('app.name') }}</a>. All rights reserved
                     </div>
                     <div class="footer-right">1.0</div>
                 </footer>

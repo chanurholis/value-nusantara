@@ -14,12 +14,15 @@ class CreateGoodsTable extends Migration
     public function up()
     {
         Schema::create('goods', function (Blueprint $table) {
-            $table->id();
+            $table->char('id')->primary();
             $table->string('goods');
             $table->string('initial_price');
             $table->text('description');
             $table->string('photo');
-            $table->unsignedBigInteger('user_id');
+            $table->char('user_id');
+            $table->string('district');
+            $table->string('village');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

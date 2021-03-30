@@ -14,7 +14,7 @@ class CreateIdentityCardsTable extends Migration
     public function up()
     {
         Schema::create('identity_cards', function (Blueprint $table) {
-            $table->id();
+            $table->char('id')->primary();
             $table->string('nik');
             $table->string('place_of_birth');
             $table->date('date_of_birth');
@@ -23,7 +23,7 @@ class CreateIdentityCardsTable extends Migration
             $table->string('province');
             $table->string('districts');
             $table->string('photo');
-            $table->unsignedBigInteger('user_id');
+            $table->char('user_id');
             $table->timestamps();
         });
     }

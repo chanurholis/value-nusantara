@@ -2,17 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Symfony\Component\HttpFoundation\Request;
-use Auth;
 use App\Officer;
+use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OfficerLoginController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('guest:officer')->except('logout');
-    }
-
     public function showLoginForm()
     {
         return view('auth.officer-login');
@@ -20,20 +15,22 @@ class OfficerLoginController extends Controller
 
     public function login(Request $request)
     {
-        // Validate the form data
         $this->validate($request, [
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required'
         ]);
 
-        // Attempt to log the user in
-        // Passwordnya pake bcrypt
-        if (Auth::guard('officer')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            // if successful, then redirect to their intended location
-            return redirect()->intended('/admin');
-        } else if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->intended('/user');
-        }
+        $valid =  Auth::guard('officer')->attempt($request->only(['email', 'password']));
+
+        if (!$valid) return redirect()->back()->withErrors(['email' => 'These credentials do not match our records.']);
+
+        $officer = Officer::where('email', $request->email)->get()->first();
+
+        Auth::guard('officer')->setUser($officer);
+
+        setcookie('API_TOKEN', $officer->api_token);
+
+        return redirect(route('officer.dashboard'));
     }
 
     public function logout()

@@ -2,14 +2,18 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-use App\Goods;
 use App\User;
+use App\Goods;
 use App\Officer;
+use App\Traits\Uuid;
+use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
 {
-    protected $guarded = [];
+    use Uuid;
+
+    protected $guarded   = [];
+    public $incrementing = false;
 
     public function goods()
     {

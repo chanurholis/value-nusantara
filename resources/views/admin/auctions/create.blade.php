@@ -31,7 +31,7 @@
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
-                                @error('goods') {{ $message }} @enderror
+                                @error('goods_id') {{ $message }} @enderror
                             </div>
                         </div>
                     </div>

@@ -1,67 +1,48 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/', 'PublicController@index');
+// Public
+Route::get('/', 'PublicController@index')->name('landing-page');
+Route::get('/about', 'PublicController@about')->name('about');
+Route::get('/auction', 'PublicController@auction')->name('auction');
+Route::get('/contact', 'PublicController@contact')->name('contact');
+Route::get('/term-of-use', 'PublicController@term_of_use')->name('term-of-use');
 
-Route::get('/term-of-us', function () {
-    return view('public.term-of-us');
-});
-
-Route::get('/admin', function () {
-    return redirect(route('admin.dashboard'));
-});
-
-Route::get('/officer', function () {
-    return redirect(route('officer.login'));
-});
-
+// Auth User
 Auth::routes(['verify' => true]);
+Route::get('/google', 'User\GoogleController@redirect');
+Route::get('/callback', 'User\GoogleController@callback');
 
-// Officer
-Route::name('officer.')->prefix('officer')->group(function () {
-    // Login
-    Route::get('/login', 'OfficerLoginController@showLoginForm')->middleware('guest')->name('login');
-    Route::post('/login', 'OfficerLoginController@login')->name('login');
-
-    Route::get('/dashboard', function () {
-        return 'Officer Dashboard';
-    })->name('dashboard');
+Route::get('/user', function () {
+    return redirect(route('user.dashboard'));
 });
 
-// Admin
-Route::name('admin.')->prefix('admin')->middleware('auth', 'verified')->group(function () {
+// User
+Route::name('user.')->prefix('user')->middleware('auth', 'verified')->group(function () {
     // Dashboard
-    Route::get('/dashboard', 'AdminController@index')->name('dashboard');
-
+    Route::get('/dashboard', 'User\UserController@index')->name('dashboard');
+    // Trased
+    Route::get('/trashed', 'User\UserController@trash')->name('trashed');
+    Route::get('/restore/{id}', 'User\UserController@restore')->name('restore');
     // Profile
-    Route::get('/profile', function () {
-        return view('admin.users.profile');
-    })->name('profile');
-
-    // Users
-    Route::resource('users', 'UserController', [
-        'names' => [
-            'index' => 'users'
-        ]
-    ]);
-
-    // Officers
-    Route::resource('officers', 'OfficerController', [
-        'names' => [
-            'index' => 'officers'
-        ]
-    ]);
-
+    Route::get('/profile', 'User\UserController@profile')->name('profile');
+    Route::patch('/profile/{id}', 'User\UserController@profile_update');
     // Goodies
-    Route::resource('goodies', 'GoodsController', [
+    Route::post('/goodies/export-filter', 'User\GoodsController@export_filter')->name('goodies.export_filter');
+    Route::post('/dependent-dropdown-village', 'GoodsController@village')->name('goodies.village');
+    Route::get('/goodies/export', 'User\GoodsController@export')->name('goodies.export');
+    Route::resource('goodies', 'User\GoodsController', [
         'names' => [
             'index' => 'goodies'
         ]
     ]);
-
     // Auctions
-    Route::resource('auctions', 'AuctionController', [
+    Route::get('/auctions/export', 'User\AuctionController@export')->name('auctions.export');
+    Route::get('/my-auctions', 'User\AuctionController@my_auction')->name('my-auctions');
+    Route::resource('auctions', 'User\AuctionController', [
         'names' => [
             'index' => 'auctions'
         ]

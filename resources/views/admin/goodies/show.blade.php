@@ -29,7 +29,7 @@
                             <td>Rp. {{ $model->initial_price }}</td>
                         </tr>
                         <tr>
-                            <th scope="col">Desktripsi</th>
+                            <th scope="col">Deskripsi</th>
                             <td>{{ $model->description }}</td>
                         </tr>
                         <tr>
@@ -42,7 +42,13 @@
                         </tr>
                         <tr>
                             <th scope="col"></th>
-                            <td><a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $model['id'] }})">Hapus</a></td>
+                            <td>
+                                <form action="{{ '/admin/goodies/' . $model->id }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger">Hapus</button>
+                                </form>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -131,40 +137,5 @@
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
-
-    function deleteConfirmation(id) {
-    swal({
-        title: "Hapus Pengguna?",
-        text: "Harap pastikan dan konfirmasi!",
-        type: "warning",
-        showCancelButton: !0,
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: "Tidak, jangan!",
-        reverseButtons: !0
-    }).then(function (e) {
-        if (e.value === true) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                type: 'DELETE',
-                url: "{{url('/admin/goodies/')}}/" + id,
-                data: {
-                    _token: CSRF_TOKEN
-                },
-                dataType: 'JSON',
-                success: function (results) {
-                    if (results.success === true) {
-                        swal("Berhasil!", results.message, "success");
-                    } else {
-                        swal("Gagal!", results.message, "error");
-                    }
-                }
-            });
-        } else {
-            e.dismiss;
-        }
-    }, function (dismiss) {
-        return false;
-    })
-}
 </script>
 @endsection
