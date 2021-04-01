@@ -43,12 +43,14 @@
                 <tbody>
                     <th scope="col">Nama Barang</th>
                     <th scope="col">Harga Awal</th>
+                    <th scope="col">Lokasi</th>
                     <th scope="col">Tanggal Dibuat</th>
                     <th scope="col"></th>
                     @foreach ($goodies as $goods)
                     <tr>
                         <td>{{ $goods['goods'] }}</td>
                         <td>Rp. {{ $goods['initial_price'] }}</td>
+                        <td>{{ $goods['village'] }}</td>
                         <td>{{ $goods['created_at'] }}</td>
                         <td class="text-right">
                             <a href="{{ '/user/goodies/' . $goods['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
@@ -62,13 +64,13 @@
     <div class="card-footer text-right">
         <nav class="d-inline-block">
             <ul class="pagination mb-0">
-                {{-- {{ $goodies->links() }} --}}
+                {{ $goodies->links() }}
             </ul>
         </nav>
     </div>
 </div>
 @endsection
 
-@section('js')
+@push('js')
 <script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
-@endsection
+@endpush

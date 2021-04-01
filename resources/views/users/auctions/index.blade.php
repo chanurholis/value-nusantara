@@ -10,12 +10,15 @@
     <div class="col-12 col-md-4 col-lg-4">
         <article class="article article-style-c">
             <div class="article-header">
+                <div class="article-badge">
+                    <div class="article-badge-item bg-danger">Rp. {{ $auction->goods->initial_price }}</div>
+                </div>
                 <img src="{{ asset('goodsFile/' . $auction->goods->photo) }}" alt="" class="article-image" style="max-width:100%; height:auto;">
             </div>
             <div class="article-details">
-                <div class="article-category"><div class="badge badge-info">{{ custom_date($auction->start_date, 'd/m/Y') }}</div></div>
+                <div class="article-category"><div class="badge badge-info">{{ custom_date($auction->start_date, 'd M Y') }}</div></div>
                 <div class="article-title">
-                    <h2><a href="{{ '/user/auctions/' . $auction->id }}">{{ $auction->goods->goods }}</a></h2>
+                    <h2><a href="{{ '/user/auctions/' . $auction->id . '/detail' }}">{{ $auction->goods->goods }}</a></h2>
                 </div>
                 <p>{{ Str::limit($auction->goods->description, 50, '...') }}</p>
                 <div class="article-user">
@@ -24,7 +27,7 @@
                         <div class="user-detail-name">
                             <a>@if ( $auction->user->id == Auth::user()->id ) Saya @else {{ $auction->user->name }} @endif</a>
                         </div>
-                        <div class="text-job">Bendungan, Pagaden Barat.</div>
+                        <div class="text-job">{{ $auction->goods->village }}</div>
                     </div>
                 </div>
             </div>

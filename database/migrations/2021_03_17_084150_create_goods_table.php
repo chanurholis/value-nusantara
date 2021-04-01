@@ -22,6 +22,7 @@ class CreateGoodsTable extends Migration
             $table->char('user_id');
             $table->string('district');
             $table->string('village');
+            $table->string('location');
             $table->softDeletes();
             $table->timestamps();
         });

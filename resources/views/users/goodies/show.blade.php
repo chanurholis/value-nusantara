@@ -29,6 +29,10 @@
                             <td>Rp. {{ $model->initial_price }}</td>
                         </tr>
                         <tr>
+                            <th scope="col">Lokasi</th>
+                            <td>{{ $model->village }}, {{ $district->name }}</td>
+                        </tr>
+                        <tr>
                             <th scope="col">Deskripsi</th>
                             <td class="text-justify">{{ $model->description }}</td>
                         </tr>
@@ -117,7 +121,9 @@
 </div>
 @endsection
 
-@section('js')
+@push('js')
+<script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
+
 <script type="text/javascript">
     var rupiah = document.getElementById('initial_price');
     rupiah.addEventListener('keyup', function(e){
@@ -140,6 +146,4 @@
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
 </script>
-
-<script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
-@endsection
+@endpush

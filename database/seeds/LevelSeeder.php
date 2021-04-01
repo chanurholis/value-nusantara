@@ -20,10 +20,6 @@ class LevelSeeder extends Seeder
             [
                 'id'    => 2,
                 'level' => 'Officer'
-            ],
-            [
-                'id'    => 3,
-                'level' => 'Society'
             ]
         ];
 

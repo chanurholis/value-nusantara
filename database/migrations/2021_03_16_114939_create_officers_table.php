@@ -23,6 +23,8 @@ class CreateOfficersTable extends Migration
             $table->string('phone_number');
             $table->string('password');
             $table->char('level_id');
+            $table->string('avatar')->nullable();
+            $table->text('description')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -17,16 +17,6 @@
                 @csrf
                 <div class="card-body">
 
-                    {{-- <div class="row">
-                        <div class="form-group col">
-                            <label class="col-form-label">Foto</label>
-                            <div id="image-preview" class="image-preview">
-                                <label for="image-upload" id="image-label">Choose File</label>
-                                <input type="file" name="photo" id="image-upload" />
-                            </div>
-                        </div>
-                    </div> --}}
-
                     <div class="row">
                         <div class="form-group col">
                             <label for="photo">Foto</label>
@@ -101,7 +91,21 @@
 @endsection
 
 @push('js')
+<script src="{{ asset('stisla/assets/js/axios.min.js') }}"></script>
 <script type="text/javascript">
+    $(function () {
+        $('#district').on('change', function () {
+            axios.post('{{ route('user.dependent-dropdown') }}', {id: $(this).val()})
+                .then(function (response) {
+                    $('#village').empty();
+
+                    $.each(response.data, function (name, name) {
+                        $('#village').append(new Option(name, name))
+                    })
+                });
+        });
+    });
+
     var rupiah = document.getElementById('initial_price');
 
     rupiah.addEventListener('keyup', function(e) {
@@ -123,18 +127,5 @@
         rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
-
-    $(function () {
-        $('#district').on('change', function () {
-            axios.post('{{ route('user.goodies.village') }}', {id: $(this).val()})
-                .then(function (response) {
-                    $('#village').empty();
-
-                $.each(response.data, function (id, name) {
-                    $('#village').append(new Option(name, id))
-                })
-            });
-        });
-    });
 </script>
 @endpush

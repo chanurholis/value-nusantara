@@ -5,8 +5,10 @@ namespace App\Http\Controllers\User;
 use PDF;
 use App\Goods;
 use App\Auction;
+use Ramsey\Uuid\Uuid;
+use App\Identity_card;
+use App\AuctionHistory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
@@ -31,7 +33,7 @@ class AuctionController extends Controller
      */
     public function create()
     {
-        $goodies = Goods::whereNotIn('id', Auction::get('goods_id'))->get();
+        $goodies = Goods::where('user_id', Auth::user()->id)->whereNotIn('id', Auction::get('goods_id'))->get();
 
         return view('users.auctions.create', [
             'goodies'  => $goodies
@@ -52,6 +54,10 @@ class AuctionController extends Controller
             'end_date'    => 'required|date'
         ]);
 
+        if ($request->start_date > $request->end_date) {
+            return redirect(route('user.auctions.create'))->with('error', 'Pastikan Anda tidak keliru mengenai tanggal!');
+        }
+
         $data = [];
         foreach ($request->all() as $key => $value) {
             $data[$key] = $value;
@@ -65,8 +71,7 @@ class AuctionController extends Controller
 
         $data['final_price'] = str_replace("Rp. ", "", $initial_price);
         $data['user_id']     = Auth::user()->id;
-        $data['officer_id']  = 1;
-        $data['status']      = 'opened';
+        $data['status']      = 'process';
 
         Auction::create($data);
 
@@ -81,23 +86,9 @@ class AuctionController extends Controller
      */
     public function show(Auction $auction)
     {
-        $status = ['opened', 'closed'];
-
         return view('users.auctions.show', [
-            'model'  => $auction,
-            'status' => $status
+            'model'  => $auction
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Auction  $auction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Auction $auction)
-    {
-        dd($auction);
     }
 
     /**
@@ -112,8 +103,11 @@ class AuctionController extends Controller
         $request->validate([
             'start_date' => 'required|date',
             'end_date'   => 'required|date',
-            'status'     => 'required'
         ]);
+
+        if ($request->start_date > $request->end_date) {
+            return redirect('/user/auctions/' . $auction->id)->with('error', 'Pastikan Anda tidak keliru mengenai tanggal!');
+        }
 
         $data = [];
         foreach ($request->all() as $key => $value) {
@@ -122,7 +116,7 @@ class AuctionController extends Controller
 
         $auction->update($data);
 
-        return redirect('/user/auction/' . $auction->id)->with('status', 'Lelang berhasil diperbarui!');
+        return redirect('/user/auctions/' . $auction->id)->with('status', 'Lelang berhasil diperbarui!');
     }
 
     /**
@@ -133,21 +127,85 @@ class AuctionController extends Controller
      */
     public function destroy(Auction $auction)
     {
-        //
-    }
-
-    public function export()
-    {
-        $auctions = Auction::all();
-
-        $pdf = PDF::loadview('users.auctions.export', compact('auctions'))->setPaper('A4', 'potrait');
-        return $pdf->stream('Laporan-Lelang');
+        dd('hapus');
     }
 
     public function my_auction()
     {
-        $auctions = Auction::where('user_id', Auth::user()->id)->get();
+        $auctions = Auction::where('user_id', Auth::user()->id)->paginate(10);
 
         return view('users.auctions.my-auction', compact('auctions'));
+    }
+
+    public function auction_detail($id)
+    {
+        // Mengambil data Lelang berdasarkan Lelang yang dipilih
+        $auction = Auction::where('id', $id)->first();
+
+        // Mengambil data Auction History berdasarkan barang yang dipilih dan id user yang sedang login
+        $auction_history = AuctionHistory::where([
+            ['user_id', '=', Auth::user()->id],
+            ['goods_id', '=', $auction['goods_id']]
+        ])->first();
+
+        if ($auction_history) {
+            return view('users.auctions.detail', ['model' => $auction]);
+        }
+
+        if ($auction->user_id == Auth::user()->id) {
+            return redirect('user/auctions/' . $id);
+        }
+
+        return view('users.auctions.follow', [
+            'model' => $auction
+        ]);
+    }
+
+    public function auction_follow($id)
+    {
+        // Mengambil data Lelang berdasarkan Barang Lelang yang diikuti
+        $auction       = Auction::where('id', $id)->first();
+        // Mengambil data KTP berdasarkan id user yang login saat ini
+        $identity_card = Identity_card::where('user_id', Auth::user()->id)->first();
+
+        // Jika tidak ada data KTP user
+        if (!$identity_card['user_id'] == Auth::user()->id) {
+            // Kembalikan ke halaman detail Lelang dengan pesan
+            return redirect('/user/auctions/' . $id . '/detail')->with('error', 'Untuk mengikuti lelang, pasti Anda melengkapi KTP terlebih dahulur!');
+        }
+
+        // Jika user belum mengikuti Lelang
+        if (!AuctionHistory::where([['user_id', Auth::user()->id], ['auction_id', $id]])->first()) {
+            // Menambahkan data pada table auction history
+            $auctionFollow = [
+                'id'         => Uuid::uuid4()->getHex(),
+                'auction_id' => $auction->id,
+                'goods_id'   => $auction->goods_id,
+                'user_id'    => Auth::user()->id
+            ];
+
+            AuctionHistory::create($auctionFollow);
+        }
+
+        // Kembalikan ke tampilan detail dengan status
+        return view('users.auctions.detail', ['model' => $auction])->with('status', 'Lelang berhasil diikuti!');
+    }
+
+    public function export_filter(Request $request)
+    {
+        $request->validate([
+            'start_export' => 'required|date',
+            'end_export'   => 'required|date'
+        ]);
+
+        $auctions = Auction::where('user_id', Auth::user()->id)->whereBetween('created_at', [$request->start_export, $request->end_export])->get();
+
+        return $this->export($auctions);
+    }
+
+    public function export($auctions)
+    {
+        $pdf = PDF::loadview('users.auctions.export', compact('auctions'))->setPaper('A4', 'potrait');
+        return $pdf->stream('Laporan-Lelang-Saya');
     }
 }

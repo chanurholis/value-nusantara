@@ -7,10 +7,12 @@ use File;
 use App\Goods;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Models\District;
+
 
 class GoodsController extends Controller
 {
@@ -21,9 +23,11 @@ class GoodsController extends Controller
      */
     public function index()
     {
-        $goodies = Goods::where('user_id', Auth::user()->id)->get();
+        $goodies  = Goods::where('user_id', Auth::user()->id)->paginate(10);
 
-        return view('users.goodies.index', compact('goodies'));
+        return view('users.goodies.index', [
+            'goodies'  => $goodies
+        ]);
     }
 
     /**
@@ -33,7 +37,7 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        $districts = District::where('city_id', '3213')->pluck('name', 'id');
+        $districts = District::where('city_id', 3213)->pluck('name', 'id');
 
         return view('users.goodies.create', [
             'districts' => $districts
@@ -53,6 +57,8 @@ class GoodsController extends Controller
             'initial_price' => 'required',
             'description'   => 'required|min:55',
             'photo'         => 'required|mimes:jpg,png,jpeg|max:2048',
+            'district'      => 'required',
+            'village'       => 'required'
         ]);
 
         $data = [];
@@ -64,6 +70,7 @@ class GoodsController extends Controller
         $data['initial_price'] = str_replace("Rp. ", "", $data['initial_price']);
         $data['photo']         = time() . '_' . Auth::user()->name . '.' . $request->file('photo')->extension();
         $data['user_id']       = Auth::user()->id;
+        $data['location']      = $data['village'] . ', ' . $data['district'];
 
         $request->file('photo')->move(public_path('goodsFile'), $data['photo']);
 
@@ -80,8 +87,11 @@ class GoodsController extends Controller
      */
     public function show(Goods $goody)
     {
+        $district = District::where('id', $goody['district'])->first();
+
         return view('users.goodies.show', [
-            'model' => $goody
+            'model'    => $goody,
+            'district' => $district
         ]);
     }
 
@@ -132,6 +142,7 @@ class GoodsController extends Controller
     {
         $delete = Goods::where('id', $id)->first();
 
+        DB::table('auctions')->where('goods_id', $id)->delete();
         Goods::destroy($id);
         File::delete('goodsFile/' . $delete->photo);
 
@@ -156,7 +167,7 @@ class GoodsController extends Controller
         return $pdf->stream('Laporan-Barang');
     }
 
-    public function village(Request $request)
+    public function origin_of_goods(Request $request)
     {
         $villages = Village::where('district_id', $request->get('id'))->pluck('name', 'id');
 

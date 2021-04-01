@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use File;
 use App\User;
 use App\Goods;
 use App\Auction;
@@ -43,11 +44,13 @@ class UserController extends Controller
     {
         $goodies  = Goods::where('user_id', Auth::user()->id)->get();
         $auctions = Auction::where('user_id', Auth::user()->id)->get();
+        $auction_histories = AuctionHistory::where('user_id', Auth::user()->id)->get();
 
 
         return view('users.profile', [
-            'goodies' => $goodies,
-            'auctions' => $auctions
+            'goodies'           => $goodies,
+            'auctions'          => $auctions,
+            'auction_histories' => $auction_histories
         ]);
     }
 
@@ -77,6 +80,7 @@ class UserController extends Controller
             $request->file('avatar')->move(public_path('usersFile'), $data['avatar']);
         }
 
+        File::delete('usersFile/' . $user->avatar);
         $user->update($data);
 
         return redirect('/user/profile/')->with('status', 'Profil berhasil diperbarui!');

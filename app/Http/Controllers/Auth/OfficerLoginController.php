@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Officer;
-use Symfony\Component\HttpFoundation\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class OfficerLoginController extends Controller
 {

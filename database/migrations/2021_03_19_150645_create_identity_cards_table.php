@@ -21,7 +21,9 @@ class CreateIdentityCardsTable extends Migration
             $table->string('gender');
             $table->string('profession');
             $table->string('province');
-            $table->string('districts');
+            $table->string('city');
+            $table->string('district');
+            $table->string('village');
             $table->string('photo');
             $table->char('user_id');
             $table->timestamps();

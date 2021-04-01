@@ -28,7 +28,7 @@
                     </div>
                     <div class="profile-widget-item">
                         <div class="profile-widget-item-label">Mengikuti</div>
-                        <div class="profile-widget-item-value">2</div>
+                        <div class="profile-widget-item-value">{{ $auction_histories->count() }}</div>
                     </div>
                 </div>
             </div>
@@ -64,11 +64,10 @@
                             @error('avatar') {{ $message }} @enderror
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="form-group col-md-6 col-12">
                             <label for="first_name">Nama Depan</label>
-                            <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ Auth::user()->first_name }}" autofocus>
+                            <input type="text" name="first_name" id="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ Auth::user()->first_name }}">
                             <div class="invalid-feedback">
                                 @error('first_name') {{ $message }} @enderror
                             </div>

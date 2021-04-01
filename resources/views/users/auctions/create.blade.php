@@ -12,6 +12,11 @@
             {{ session('status') }}
         </div>
         @endif
+        @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+        @endif
         <div class="card">
             <form action="{{ route('user.auctions.store') }}" method="post">
                 @csrf
@@ -52,16 +57,6 @@
                             <input type="date" id="end_date" value="{{ old('end_date'), date('Y-m-d') }}" name="end_date" class="form-control @error('end_date') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 @error('end_date') {{ $message }} @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="location">Lokasi</label>
-                            <input type="text" id="location" class="form-control" placeholder="Masukan Lokasi">
-                            <div class="invalid-feedback">
-                                @error('location') {{ $message }} @enderror
                             </div>
                         </div>
                     </div>

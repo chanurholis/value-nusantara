@@ -29,6 +29,8 @@ if (!function_exists('auction_status')) {
     {
         if ($status == 'opened') {
             return 'Dibuka';
+        } elseif ($status == 'process') {
+            return 'Diproses';
         } else {
             return 'Ditutup';
         }

@@ -7,10 +7,12 @@ use App\Goods;
 use App\Officer;
 use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Auction extends Model
 {
     use Uuid;
+    use SoftDeletes;
 
     protected $guarded   = [];
     public $incrementing = false;

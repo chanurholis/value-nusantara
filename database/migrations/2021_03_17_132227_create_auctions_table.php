@@ -20,7 +20,7 @@ class CreateAuctionsTable extends Migration
             $table->date('end_date');
             $table->string('final_price');
             $table->char('user_id');
-            $table->char('officer_id');
+            $table->char('officer_id')->nullable();
             $table->enum('status', ['opened', 'process', 'closed']);
             $table->softDeletes();
             $table->timestamps();

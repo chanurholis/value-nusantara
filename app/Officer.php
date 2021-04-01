@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 

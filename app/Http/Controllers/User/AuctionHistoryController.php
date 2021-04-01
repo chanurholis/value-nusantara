@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Auction;
 use App\AuctionHistory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class AuctionHistoryController extends Controller
 {
@@ -16,9 +16,11 @@ class AuctionHistoryController extends Controller
      */
     public function index()
     {
-        $auctions = Auction::where('status', 'opened')->get();
+        $auctionHistories = AuctionHistory::where('user_id', Auth::user()->id)->get();
 
-        return view('users.auction-history.index', compact('auctions'));
+        return view('users.auction-history.index', [
+            'model' => $auctionHistories
+        ]);
     }
 
     /**
@@ -48,11 +50,9 @@ class AuctionHistoryController extends Controller
      * @param  \App\AuctionHistory  $auctionHistory
      * @return \Illuminate\Http\Response
      */
-    public function show(AuctionHistory $auctionHistory)
+    public function show(AuctionHistory $auction_history)
     {
         dd('hai');
-
-        dd($auctionHistory);
     }
 
     /**

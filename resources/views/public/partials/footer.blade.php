@@ -2,59 +2,27 @@
             <div class="container">
                 <div class="row mb-5 py-3">
                     <div class="col-sm-6 col-lg-2 py-3">
-                    <h5 class="mb-3">Pages</h5>
+                    <h5 class="mb-3">Halaman</h5>
                     <ul class="menu-link">
-                        <li><a href="#" class="">Features</a></li>
-                        <li><a href="#" class="">Customers</a></li>
-                        <li><a href="#" class="">Pricing</a></li>
-                        <li><a href="#" class="">GDPR</a></li>
-                    </ul>
-                    </div>
-                    <div class="col-sm-6 col-lg-2 py-3">
-                    <h5 class="mb-3">Company</h5>
-                    <ul class="menu-link">
-                        <li><a href="#" class="">About</a></li>
-                        <li><a href="#" class="">Team</a></li>
-                        <li><a href="#" class="">Leadership</a></li>
-                        <li><a href="#" class="">Careers</a></li>
-                        <li><a href="#" class="">HIRING!</a></li>
+                        <li><a href="#" class="">Beranda</a></li>
+                        <li><a href="#" class="">Tentang </a></li>
+                        <li><a href="#" class="">Lelang</a></li>
+                        <li><a href="#" class="">Kontak</a></li>
                     </ul>
                     </div>
                     <div class="col-md-6 col-lg-4 py-3">
-                    <h5 class="mb-3">Contact</h5>
+                    <h5 class="mb-3">Kontak</h5>
                     <ul class="menu-link">
                         <li><a href="#" class="">Contact Us</a></li>
-                        <li><a href="#" class="">Office Location</a></li>
-                        <li><a href="#" class="">hello@mobster.com</a></li>
-                        <li><a href="#" class="">support@macodeid.com</a></li>
-                        <li><a href="#" class="">+808 11233 900</a></li>
+                        <li><a href="#" class="">Kantor Value Nusantara</a></li>
+                        <li><a href="#" class="">nusantaravalue@gmail.com</a></li>
                     </ul>
-                    </div>
-                    <div class="col-md-6 col-lg-4 py-3">
-                    <h5 class="mb-3">Subscribe</h5>
-                    <p>Get some offers, news, or update features of application</p>
-                    <form method="POST">
-                        <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Your email..">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-primary"><span class="mai-send"></span></button>
-                        </div>
-                        </div>
-                    </form>
-            
-                    <!-- Social Media Button -->
-                    <div class="mt-4">
-                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-facebook"></span></a>
-                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-twitter"></span></a>
-                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-instagram"></span></a>
-                        <a href="#" class="btn btn-fab btn-primary fg-white"><span class="mai-logo-google"></span></a>
-                    </div>
                     </div>
                 </div>
             </div>
-        
+
             <hr>
-        
+
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-md-6 py-2">

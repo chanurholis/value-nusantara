@@ -3,16 +3,17 @@
 <head>
 	<title>{{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/bootstrap.min.css') }}">
-</head>
-<body>
 	<style type="text/css">
 		table tr td,
 		table tr th{
 			font-size: 9pt;
 		}
 	</style>
+</head>
+<body>
 	<center>
-		<h5>Laporan Lelang</h4>
+		<img src="{{ asset('img/favicon.png') }}" width="50" alt="logo">
+		<h5>Laporan Lelang</h5>
 	</center>
 
     <br>

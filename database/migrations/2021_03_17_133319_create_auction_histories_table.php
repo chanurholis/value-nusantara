@@ -18,7 +18,7 @@ class CreateAuctionHistoriesTable extends Migration
             $table->char('auction_id');
             $table->char('goods_id');
             $table->char('user_id');
-            $table->string('bid');
+            $table->string('bid')->nullable();
             $table->timestamps();
         });
     }
