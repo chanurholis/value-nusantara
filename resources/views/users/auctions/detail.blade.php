@@ -10,6 +10,11 @@
         {{ session('status') }}
     </div>
 @endif
+@if (session('error'))
+    <div class="alert alert-primary">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="row mt-sm-4">
     <div class="col-12 col-md-12 col-lg-6">
         <div class="card">
@@ -47,33 +52,37 @@
     </div>
     <div class="col-12 col-md-12 col-lg-6">
         <div class="card">
-            <form action="{{ '/user/auctions/' . $model->id }}" method="post" enctype="multipart/form-data">
+            {{-- <form action="{{ '/user/auction-histories/' . $model->id }}" method="post">
                 @method('patch')
-                @csrf
+                @csrf --}}
                 <div class="card-body">
 
                     <div class="card chat-box card-success" id="mychatbox2">
                         <div class="card-header">
-                            <h4><i class="fas fa-circle text-success mr-2" title="Online" data-toggle="tooltip"></i>Penawaran Terakhir</h4>
+                            <h4><i class="fas fa-circle text-success mr-2" title="Online" data-toggle="tooltip"></i>Penawaran</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-striped">
                                     <tr>
-                                        <th scope="col">Chacha Nurholis</th>
-                                        <td>Rp. 5.700.000</td>
+                                        <th scope="col">Batas Penawaran</th>
+                                        <td>Rp. <b>{{ $auction_history[0]->auction->final_price }}</b></td>
                                     </tr>
-                                    <tr>
-                                        <th scope="col">Azka</th>
-                                        <td>Rp. 5.800.000</td>
-                                    </tr>
+                                    @foreach ($auction_history as $item)
+                                        <tr>
+                                            <th scope="col">{{ $item->user->name }}</th>
+                                            <td>@if(!$item->bid) Mengikuti, belum melakukan penawaran. @else Rp. {{ $item->bid }} @endif</td>
+                                        </tr>
+                                    @endforeach
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer chat-form">
-                            <form id="chat-form2">
-                                <input type="text" class="form-control" placeholder="Rp. 000.000.000" id="bid">
-                                    <button class="btn btn-primary">
+                            <form action="{{ '/user/auctions/' . $model->id . '/bid' }}" method="post">
+                                @method('patch')
+                                @csrf
+                                <input type="text" name="bid" class="form-control @error('bid') is-invalid @enderror" placeholder="Rp. 000.000.000" id="bid">
+                                    <button type="submit" class="btn btn-primary">
                                     <i class="far fa-paper-plane"></i>
                                 </button>
                             </form>
@@ -81,7 +90,7 @@
                     </div>
 
                 </div>
-            </form>
+            {{-- </form> --}}
         </div>
     </div>
 </div>
@@ -90,25 +99,26 @@
 @push('js')
 <script src="{{ asset('stisla/assets/js/page/components-chat-box.js') }}"></script>
 <script type="text/javascript">
-    var rupiah = document.getElementById('bid');
-    rupiah.addEventListener('keyup', function(e){
-        rupiah.value = formatRupiah(this.value, 'Rp. ');
-    });
+     var rupiah = document.getElementById('bid');
 
-    function formatRupiah(angka, prefix){
-        var number_string = angka.replace(/[^,\d]/g, '').toString(),
-        split   		  = number_string.split(','),
-        sisa     		  = split[0].length % 3,
-        rupiah     		  = split[0].substr(0, sisa),
-        ribuan     		  = split[0].substr(sisa).match(/\d{3}/gi);
+rupiah.addEventListener('keyup', function(e) {
+    rupiah.value = formatRupiah(this.value, 'Rp. ');
+});
 
-        if(ribuan){
-            separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
+function formatRupiah(angka, prefix) {
+    var number_string = angka.replace(/[^,\d]/g, '').toString(),
+    split   		  = number_string.split(','),
+    sisa     		  = split[0].length % 3,
+    rupiah     		  = split[0].substr(0, sisa),
+    ribuan     		  = split[0].substr(sisa).match(/\d{3}/gi);
 
-        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+    if(ribuan) {
+        separator = sisa ? '.' : '';
+        rupiah    += separator + ribuan.join('.');
     }
+
+    rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+    return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
 </script>
 @endpush

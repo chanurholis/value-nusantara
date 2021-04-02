@@ -17,4 +17,9 @@ class AuctionHistory extends Model
     {
         return $this->belongsTo(Auction::class, 'auction_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

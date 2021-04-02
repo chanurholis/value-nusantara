@@ -39,9 +39,17 @@ class AuctionHistoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, AuctionHistory $auctionHistory)
     {
-        //
+        $request->validate([
+            'bid' => 'required'
+        ]);
+
+        $auctionHistory = AuctionHistory::where('id', $request->id)->get();
+
+        dd($auctionHistory);
+
+        return redirect('/user/auctions');
     }
 
     /**
@@ -52,7 +60,7 @@ class AuctionHistoryController extends Controller
      */
     public function show(AuctionHistory $auction_history)
     {
-        dd('hai');
+        // 
     }
 
     /**
@@ -75,7 +83,7 @@ class AuctionHistoryController extends Controller
      */
     public function update(Request $request, AuctionHistory $auctionHistory)
     {
-        //
+        dd($request->all());
     }
 
     /**

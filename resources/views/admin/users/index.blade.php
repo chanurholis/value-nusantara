@@ -33,11 +33,16 @@
                         <td>{{ $user['name'] }}</td>
                         <td>{{ $user['email'] }}</td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-danger @if($user['id'] == Auth::user()->id) d-none @endif" onclick="deleteConfirmation({{ $user['id'] }})"><i class="fa fa-trash"></i></a>
+                            <form action="{{ '/admin/users/' . $user['id'] }}" method="post">
+                                @csrf
+                                @method('delete')
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                             <a href="{{ '/admin/users/' . $user['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                             <a href="{{ '/admin/users/' . $user['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
+                            </form>
                         </td>
                     </tr>
+                    <form action=""></form>
                     @endforeach
                 </tbody>
             </table>
@@ -51,42 +56,4 @@
         </nav>
     </div>
 </div>
-
-<script>
-    function deleteConfirmation(id) {
-    swal({
-        title: "Hapus Pengguna?",
-        text: "Harap pastikan dan konfirmasi!",
-        type: "warning",
-        showCancelButton: !0,
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: "Tidak, jangan!",
-        reverseButtons: !0
-    }).then(function (e) {
-        if (e.value === true) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                type: 'DELETE',
-                url: "{{url('/admin/users/')}}/" + id,
-                data: {
-                    _token: CSRF_TOKEN
-                },
-                dataType: 'JSON',
-                success: function (results) {
-                    if (results.success === true) {
-                        swal("Berhasil!", results.message, "success");
-                    } else {
-                        swal("Gagal!", results.message, "error");
-                    }
-                }
-            });
-        } else {
-            e.dismiss;
-        }
-    }, function (dismiss) {
-        return false;
-    })
-}
-</script>
-
 @endsection

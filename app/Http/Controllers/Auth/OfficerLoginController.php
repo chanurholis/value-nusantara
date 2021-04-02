@@ -27,6 +27,10 @@ class OfficerLoginController extends Controller
 
         $officer = Officer::where('email', $request->email)->get()->first();
 
+        if ($officer->level_id == 1) {
+            return redirect(route('admin.dashboard'));
+        }
+
         Auth::guard('officer')->setUser($officer);
 
         setcookie('API_TOKEN', $officer->api_token);

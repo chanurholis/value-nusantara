@@ -63,7 +63,13 @@
                         </tr>
                         <tr>
                             <th scope="col"></th>
-                            <td><a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $model['id'] }})">Hapus</a></td>
+                            <td>
+                                <form action="{{ '/user/auctions/' . $model->id }}" method="post" id="auctionDelete">
+                                    @method('delete')
+                                    @csrf
+                                    <button class="btn btn-danger" data-confirm="Yakin?|Apakah Anda ingin melanjutkan?" data-confirm-yes="event.preventDefault(); document.getElementById('auctionDelete').submit();">Hapus</button>
+                                </form>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -107,62 +113,8 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    var rupiah = document.getElementById('initial_price');
-    rupiah.addEventListener('keyup', function(e){
-        rupiah.value = formatRupiah(this.value, 'Rp. ');
-    });
-
-    function formatRupiah(angka, prefix){
-        var number_string = angka.replace(/[^,\d]/g, '').toString(),
-        split   		  = number_string.split(','),
-        sisa     		  = split[0].length % 3,
-        rupiah     		  = split[0].substr(0, sisa),
-        ribuan     		  = split[0].substr(sisa).match(/\d{3}/gi);
-
-        if(ribuan){
-            separator = sisa ? '.' : '';
-            rupiah += separator + ribuan.join('.');
-        }
-
-        rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
-        return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
-    }
-
-    function deleteConfirmation(id) {
-    swal({
-        title: "Hapus Pengguna?",
-        text: "Harap pastikan dan konfirmasi!",
-        type: "warning",
-        showCancelButton: !0,
-        confirmButtonText: "Ya, hapus!",
-        cancelButtonText: "Tidak, jangan!",
-        reverseButtons: !0
-    }).then(function (e) {
-        if (e.value === true) {
-            var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-            $.ajax({
-                type: 'DELETE',
-                url: "{{url('/user/goodies/')}}/" + id,
-                data: {
-                    _token: CSRF_TOKEN
-                },
-                dataType: 'JSON',
-                success: function (results) {
-                    if (results.success === true) {
-                        swal("Berhasil!", results.message, "success");
-                    } else {
-                        swal("Gagal!", results.message, "error");
-                    }
-                }
-            });
-        } else {
-            e.dismiss;
-        }
-    }, function (dismiss) {
-        return false;
-    })
-}
-</script>
 @endsection
+
+@push('js')
+<script src="{{ asset('stisla/assets/js/page/bootstrap-modal.js') }}"></script>
+@endpush

@@ -17,9 +17,9 @@
 <div class="card">
     <div class="card-header">
         <h4>Petugas <span>({{ $officers->count() }})</span></h4>
-        <div class="card-header-action">
+        {{-- <div class="card-header-action">
             <a href="{{ route('admin.officers.create') }}" class="btn btn-danger">Ekspor <i class="fas fa-file-export"></i></a>
-        </div>
+        </div> --}}
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
@@ -40,11 +40,10 @@
                             <form action="{{ '/admin/officers/' . $officer->id }}" method="post">
                                 @csrf
                                 @method('delete')
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                <button type="submit" class="btn btn-danger @if($officer->id == Auth::user()->id) d-none @endif"><i class="fa fa-trash"></i></button>
                                 <a href="{{ '/admin/officers/' . $officer['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                                 <a href="{{ '/admin/officers/' . $officer['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
                             </form>
-                            {{-- <a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $officer['id'] }})"><i class="fa fa-trash"></i></a> --}}
                         </td>
                     </tr>
                     @endforeach

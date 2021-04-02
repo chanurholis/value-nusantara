@@ -8,9 +8,7 @@
                     <p class="mb-4">
                         Berinovasi untuk mempermudah <b>Lelang</b> Anda.
                     </p>
-
                     <a href="{{ route('login') }}" class="btn btn-dark rounded-pill">Mulai</a>
-
                 </div>
                 <div class="col-lg-6 d-none d-lg-block wow zoomIn">
                     <div class="img-place floating-animate">

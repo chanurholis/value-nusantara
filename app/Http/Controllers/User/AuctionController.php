@@ -125,9 +125,11 @@ class AuctionController extends Controller
      * @param  \App\Auction  $auction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Auction $auction)
+    public function destroy($id)
     {
-        dd('hapus');
+        Auction::where('id', $id)->delete();
+
+        return redirect('/user/my-auctions')->with('status', 'Lelang berhasil dihapus!');
     }
 
     public function my_auction()
@@ -149,7 +151,12 @@ class AuctionController extends Controller
         ])->first();
 
         if ($auction_history) {
-            return view('users.auctions.detail', ['model' => $auction]);
+            $auction_history = AuctionHistory::where('goods_id', $auction['goods_id'])->orderBy('bid', 'ASC')->get();
+
+            return view('users.auctions.detail', [
+                'model'           => $auction,
+                'auction_history' => $auction_history
+            ]);
         }
 
         if ($auction->user_id == Auth::user()->id) {
@@ -174,8 +181,11 @@ class AuctionController extends Controller
             return redirect('/user/auctions/' . $id . '/detail')->with('error', 'Untuk mengikuti lelang, pasti Anda melengkapi KTP terlebih dahulur!');
         }
 
+        $auction_history = AuctionHistory::where('goods_id', $auction['goods_id'])->get();
+
         // Jika user belum mengikuti Lelang
         if (!AuctionHistory::where([['user_id', Auth::user()->id], ['auction_id', $id]])->first()) {
+
             // Menambahkan data pada table auction history
             $auctionFollow = [
                 'id'         => Uuid::uuid4()->getHex(),
@@ -188,7 +198,7 @@ class AuctionController extends Controller
         }
 
         // Kembalikan ke tampilan detail dengan status
-        return view('users.auctions.detail', ['model' => $auction])->with('status', 'Lelang berhasil diikuti!');
+        return view('users.auctions.detail', ['model' => $auction, 'auction_history' => $auction_history])->with('status', 'Lelang berhasil diikuti!');
     }
 
     public function export_filter(Request $request)
@@ -207,5 +217,34 @@ class AuctionController extends Controller
     {
         $pdf = PDF::loadview('users.auctions.export', compact('auctions'))->setPaper('A4', 'potrait');
         return $pdf->stream('Laporan-Lelang-Saya');
+    }
+
+    public function bid($id, Request $request)
+    {
+        $request->validate([
+            'bid' => 'required'
+        ]);
+
+        $auction_history = AuctionHistory::where('user_id', Auth::user()->id)->first();
+
+        $bid_request = str_replace('.', '', $request->bid);
+        $final_price = str_replace('.', '', $auction_history->auction->final_price);
+        $bid_request = str_replace('Rp ', '', $bid_request);
+
+        if ($bid_request < $final_price) {
+            return $this->auction_follow($id)->with('error', 'Penawaran harus lebih besar dari!');
+        }
+
+        $data = [];
+        foreach ($request->all() as $key => $value) {
+            $data[$key] = $value;
+        }
+
+        $data['bid'] = $bid_request;
+
+        AuctionHistory::where('user_id', Auth::user()->id)->update(['bid' => $data['bid']]);
+        Auction::where('id', $id)->update(['final_price' => $data['bid']]);
+
+        return $this->auction_follow($id);
     }
 }

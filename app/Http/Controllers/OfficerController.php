@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Officer;
+use Ramsey\Uuid\Uuid;
 
 class OfficerController extends Controller
 {
@@ -57,6 +58,8 @@ class OfficerController extends Controller
 
         unset($data['password_confirmation']);
 
+        $data['email_verified_at'] = now();
+        $data['id'] = Uuid::uuid4()->getHex();
         $data['password'] = Hash::make($request['password']);
         $data['name']     = $data['first_name'] . ' ' . $data['last_name'];
 
