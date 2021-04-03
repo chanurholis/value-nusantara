@@ -9,6 +9,7 @@ Route::get('/about', 'PublicController@about')->name('about');
 Route::get('/auction', 'PublicController@auction')->name('auction');
 Route::get('/contact', 'PublicController@contact')->name('contact');
 Route::get('/term-of-use', 'PublicController@term_of_use')->name('term-of-use');
+Route::get('/privacy-policy', 'PublicController@privacy_policy')->name('privacy-policy');
 
 // Auth User
 Auth::routes(['verify' => true]);

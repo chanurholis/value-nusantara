@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Auction;
+use Symfony\Component\HttpFoundation\Request;
 
 class PublicController extends Controller
 {
@@ -33,8 +34,18 @@ class PublicController extends Controller
         return view('public.contact');
     }
 
+    public function send(Request $request)
+    {
+        dd($request);
+    }
+
     public function term_of_use()
     {
-        return view('public.term-of-use');
+        return view('public.term-and-conditions');
+    }
+
+    public function privacy_policy()
+    {
+        return view('public.privacy-policy');
     }
 }
