@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.0",
         "laravolt/indonesia": "^0.26",
-        "ramsey/uuid": "^4.1"
+        "ramsey/uuid": "^4.1",
+        "symfony/mailer": "^5.4"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
