@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 // Public
-Route::get('/', 'PublicController@index')->name('landing-page');
+Route::get('/', function () {
+    return redirect(route('index-dcms'));
+});
 Route::get('/about', 'PublicController@about')->name('about');
 Route::get('/auction', 'PublicController@auction')->name('auction');
 Route::get('/contact', 'PublicController@contact')->name('contact');

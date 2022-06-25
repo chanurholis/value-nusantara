@@ -1,0 +1,13 @@
+{
+    "name": "Dcms",
+    "alias": "dcms",
+    "description": "",
+    "keywords": [],
+    "order": 0,
+    "providers": [
+        "Modules\\Dcms\\Providers\\DcmsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
