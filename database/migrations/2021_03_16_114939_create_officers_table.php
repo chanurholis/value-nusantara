@@ -14,11 +14,18 @@ class CreateOfficersTable extends Migration
     public function up()
     {
         Schema::create('officers', function (Blueprint $table) {
-            $table->id();
+            $table->char('id')->primary();
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('name');
-            $table->string('username');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone_number');
             $table->string('password');
-            $table->unsignedBigInteger('level_id');
+            $table->char('level_id');
+            $table->string('avatar')->nullable();
+            $table->text('description')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

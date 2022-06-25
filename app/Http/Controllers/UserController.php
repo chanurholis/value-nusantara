@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Identity_card;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Hash;
@@ -117,26 +118,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $delete = User::where('id', $id)->delete();
+        User::where('id', $id)->delete();
+        Identity_card::where('user_id', $id)->delete();
 
-        if ($delete == 1) {
-            $success = true;
-            $message = "Pengguna berhasil dihapus";
-
-            return response()->json([
-                'success' => $success,
-                'message' => $message,
-            ]);
-        } else {
-            $success = false;
-            $message = "Pengguna tidak ditemukan";
-
-            return response()->json([
-                'success' => $success,
-                'message' => $message,
-            ]);
-        }
-
-        return redirect(route('admin.users'));
+        return redirect(route('admin.users'))->with('status', 'Pengguna berhasil dihapus!');
     }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.admin-master')
 
-@section('title', 'Dashboard')
+@section('title', '| Dashboard')
 
 @section('title-header', 'Beranda')
 
@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Pengguna</h4>
+                        <h4>Pengguna</h4>
                     </div>
                     <div class="card-body">{{ $users->count() }}</div>
                 </div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Petugas</h4>
+                        <h4>Petugas</h4>
                     </div>
                     <div class="card-body">{{ $officers->count() }}</div>
                 </div>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Barang</h4>
+                        <h4>Barang</h4>
                     </div>
                     <div class="card-body">{{ $goodies->count() }}</div>
                 </div>
@@ -53,14 +53,14 @@
                 </div>
                 <div class="card-wrap">
                     <div class="card-header">
-                        <h4>Total Lelang</h4>
+                        <h4>Lelang</h4>
                     </div>
                     <div class="card-body">{{ $auctions->count() }}</div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-lg-8 col-md-12 col-12 col-sm-12">
           <div class="card">
             <div class="card-header">
@@ -107,35 +107,27 @@
             <div class="card-body">
               <ul class="list-unstyled list-unstyled-border">
                 <li class="media">
-                  <img class="mr-3 rounded-circle" width="50" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-1.png" alt="avatar">
+                  <img class="mr-3 rounded-circle" width="50" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-1.png" alt="avatar">
                   <div class="media-body">
                     <div class="float-right text-primary">Now</div>
                     <div class="media-title">Farhan A Mujib</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.</span>
                   </div>
                 </li>
                 <li class="media">
-                  <img class="mr-3 rounded-circle" width="50" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-2.png" alt="avatar">
+                  <img class="mr-3 rounded-circle" width="50" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-2.png" alt="avatar">
                   <div class="media-body">
                     <div class="float-right">12m</div>
                     <div class="media-title">Ujang Maman</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla.</span>
                   </div>
                 </li>
                 <li class="media">
-                  <img class="mr-3 rounded-circle" width="50" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-3.png" alt="avatar">
+                  <img class="mr-3 rounded-circle" width="50" src="http://localhost/TEMPLATE/stisla/assets/img/avatar/avatar-3.png" alt="avatar">
                   <div class="media-body">
                     <div class="float-right">17m</div>
                     <div class="media-title">Rizal Fakhri</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
-                  </div>
-                </li>
-                <li class="media">
-                  <img class="mr-3 rounded-circle" width="50" src="http://172.20.10.3/TEMPLATE/stisla/assets/img/avatar/avatar-4.png" alt="avatar">
-                  <div class="media-body">
-                    <div class="float-right">21m</div>
-                    <div class="media-title">Alfa Zulkarnain</div>
-                    <span class="text-small text-muted">Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin.</span>
+                    <span class="text-small text-muted">Lorem ipsum dolor sit amet!</span>
                   </div>
                 </li>
               </ul>
@@ -147,6 +139,6 @@
             </div>
           </div>
         </div>
-      </div>
+    </div> --}}
 </section>
 @endsection

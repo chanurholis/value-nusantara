@@ -17,28 +17,33 @@
 <div class="card">
     <div class="card-header">
         <h4>Petugas <span>({{ $officers->count() }})</span></h4>
-        <div class="card-header-action">
-            <a href="{{ route('admin.officers.create') }}" class="btn btn-primary">Tambah <i class="fas fa-plus"></i></a>
-        </div>
+        {{-- <div class="card-header-action">
+            <a href="{{ route('admin.officers.create') }}" class="btn btn-danger">Ekspor <i class="fas fa-file-export"></i></a>
+        </div> --}}
     </div>
     <div class="card-body p-0">
         <div class="table-responsive">
             <table class="table table-striped">
                 <tbody>
                     <th scope="col">Nama</th>
-                    <th scope="col">Nama Pengguna</th>
-                    {{-- <th scope="col">Surel</th> --}}
+                    <th scope="col">Surel</th>
                     <th scope="col">Wewenang</th>
+                    <th scope="col">Status</th>
                     <th scope="col"></th>
-                    @foreach ($officers as $user)      
+                    @foreach ($officers as $officer)      
                     <tr>
-                        <td>{{ $user['name'] }}</td>
-                        <td>{{ $user['username'] }}</td>
-                        <td>{{ $user->level->level }}</td>
+                        <td>{{ $officer['name'] }}</td>
+                        <td>{{ $officer['email'] }}</td>
+                        <td>{{ officer_level($officer->level_id) }}</td>
+                        <td>@if ($officer['email_verified_at']) <div class="badge badge-success">Aktif</div> @else <div class="badge badge-danger">Belum Aktif</div> @endif</td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $user['id'] }})"><i class="fa fa-trash"></i></a>
-                            <a href="{{ '/admin/officers/' . $user['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
-                            <a href="{{ '/admin/officers/' . $user['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
+                            <form action="{{ '/admin/officers/' . $officer->id }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger @if($officer->id == Auth::user()->id) d-none @endif"><i class="fa fa-trash"></i></button>
+                                <a href="{{ '/admin/officers/' . $officer['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+                                <a href="{{ '/admin/officers/' . $officer['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
+                            </form>
                         </td>
                     </tr>
                     @endforeach

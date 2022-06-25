@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Arr;
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +51,41 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($this->isHttpException($exception)) {
+            switch ($exception->getStatusCode()) {
+                case 404:
+                    return response()->view('errors.404', [], $exception->getStatusCode());
+                    break;
+                case 403:
+                    return response()->view('errors.403', [], $exception->getStatusCode());
+                    break;
+                case 405:
+                    return response()->view('errors.405', [], $exception->getStatusCode());
+                    break;
+            }
+        }
+
         return parent::render($request, $exception);
+    }
+
+    protected function unauthenticated($request, \Illuminate\Auth\AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        $guard = Arr::get($exception->guards(), 0);
+
+        switch ($guard) {
+            case 'officer':
+                $route = 'officer.login';
+                break;
+
+            default:
+                $route = 'login';
+                break;
+        }
+
+        return redirect()->guest(route($route));
     }
 }

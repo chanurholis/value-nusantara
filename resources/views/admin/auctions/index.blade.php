@@ -1,8 +1,8 @@
 @extends('layouts.admin-master')
 
-@section('title', 'Lelang')
+@section('title', '| My Lelang')
 
-@section('title-header', 'Lelang')
+@section('title-header', 'My Lelang')
 
 @section('content')
 <div class="row">
@@ -16,9 +16,9 @@
 </div>
 <div class="card">
     <div class="card-header">
-        <h4>Lelang <span>({{ $auctions->count() }})</span></h4>
+        <h4>My Lelang <span>({{ $auctions->count() }})</span></h4>
         <div class="card-header-action">
-            <a href="{{ route('admin.auctions.create') }}" class="btn btn-primary">Tambah <i class="fas fa-plus"></i></a>
+            <a href="{{ route('admin.auctions.export') }}" target="_blank" class="btn btn-danger">Ekpor <i class="fas fa-file-export"></i></a>
         </div>
     </div>
     <div class="card-body p-0">
@@ -26,19 +26,19 @@
             <table class="table table-striped">
                 <tbody>
                     <th scope="col">Nama Barang</th>
-                    <th scope="col">Tanggal</th>
-                    <th scope="col">Harga Awal</th>
-                    <th scope="col">Deskripsi Barang</th>
+                    <th scope="col">Harga Akhir</th>
+                    <th scope="col">Tanggal Mulai</th>
+                    <th scope="col">Tanggal Berakhir</th>
+                    <th scope="col">Status</th>
                     <th scope="col"></th>
                     @foreach ($auctions as $auction)      
                     <tr>
-                        <td>{{ $auction['auction'] }}</td>
-                        <td>{{ $auction['date'] }}</td>
-                        <td>{{ $auction['initial_price'] }}</td>
-                        <td>{{ $auction['description'] }}</td>
+                        <td>{{ $auction->goods->goods }}</td>
+                        <td>Rp. {{ $auction['final_price'] }}</td>
+                        <td>{{ $auction['start_date'] }}</td>
+                        <td>{{ $auction['end_date'] }}</td>
+                        <td>@if ($auction['status'] == 'opened') <div class="badge badge-success">{{ auction_status($auction['status']) }}</div> @else <div class="badge badge-warning">{{ auction_status($auction['status']) }}</div> @endif</td>
                         <td class="text-right">
-                            <a href="#" class="btn btn-danger" onclick="deleteConfirmation({{ $auction['id'] }})"><i class="fa fa-trash"></i></a>
-                            <a href="{{ '/admin/auctions/' . $auction['id'] . '/edit' }}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
                             <a href="{{ '/admin/auctions/' . $auction['id'] }}" class="btn btn-info"><i class="fa fa-search"></i></a>
                         </td>
                     </tr>
