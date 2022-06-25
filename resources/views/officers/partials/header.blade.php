@@ -6,17 +6,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }} @yield('title')</title>
 
-    <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/x-icon">
-    <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/bootstrap.min.css') }}">
-    <!-- CSS Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/5.1.1/bootstrap-social.css" integrity="sha512-sopmFEmRVsWt542K+yzH3FQ1KJfdosOJG+bGLs9ZJT07b/3gUxRA9ICuJg2JtoZ9WeknAUuwJ0ggnmrV1YL6kQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('stisla/node_modules/bootstrap-social/bootstrap-social.css') }}">
-    <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('stisla/assets/css/components.css') }}">
-    <!-- Page Specific CSS File -->
     @yield('css')
 </head>
 
