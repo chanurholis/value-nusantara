@@ -2,15 +2,17 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use App\Auction;
 use App\Traits\Uuid;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
+
     use Uuid;
 
     /**
@@ -19,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $guarded   = [];
+    
     public $incrementing = false;
 
     /**

@@ -13,7 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'DcmsController@index')->name('index-dcms');
+// Route::get('/', 'DcmsController@index')->name('index-dcms');
 
 Route::prefix('dcms')->group(function() {
     Route::get('/', 'DcmsController@index');

@@ -24,7 +24,7 @@ class PublicController extends Controller
 
     public function auction()
     {
-        $auctions = Auction::where('status', 'opened')->get();
+        $auctions = Auction::where('status', 'opened')->get() ?? [];
 
         return view('public.auction', compact('auctions'));
     }

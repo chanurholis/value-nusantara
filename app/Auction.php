@@ -2,19 +2,24 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 use App\User;
 use App\Goods;
 use App\Officer;
 use App\Traits\Uuid;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Auction extends Model
 {
     use Uuid;
+
     use SoftDeletes;
 
+    protected $table = 'auctions';
+
     protected $guarded   = [];
+
     public $incrementing = false;
 
     public function goods()
